@@ -1,0 +1,67 @@
+.share-nav {
+  display: flex;
+  align-items: center;
+  .label-share {
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 20px;
+    margin-bottom: 0;
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+  ul {
+    display: flex;
+    align-items: center;
+  }
+  li {
+    &:last-child {
+      a {
+        margin-right: 0;
+      }
+    }
+  }
+  .share-fb a, .share-twitter a, .share-in a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    @extend .animate;
+    &:hover {
+      background-color: $accent;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 16px;
+      height: 16px;
+      display: block;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+  .share-fb a {
+    background-color: #3e5598;
+    &:before {
+      background-image: url("/assets/fb-white.png");
+    }
+  }
+  .share-twitter a{
+    background-color: #5fa9ee;
+    &:before {
+      background-image: url("/assets/twitter-white.png");
+    }
+  }
+  .share-in a {
+    background-color: #2074b6;
+    &:before {
+      background-image: url("/assets/in-white.png");
+    }
+  }
+}

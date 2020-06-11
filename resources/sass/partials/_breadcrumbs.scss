@@ -1,0 +1,29 @@
+.breadcrumbs {
+  padding: 20px 0;
+  p {
+    margin-bottom: 0;
+  }
+  a, span {
+    @extend .animate;
+    font-size: 18px;
+    line-height: 22px;
+    color: black;
+    text-decoration: none;
+    &:after {
+      content: ">";
+      padding: 0 5px;
+    }
+    &:last-child::after {
+      display: none;
+    }
+  }
+  .current {
+    font-weight: 500;
+  }
+  a:hover {
+    color: $accent;
+  }
+  @media only screen and (max-width: 450px) {
+    a, span { font-size: 14px; }
+  }
+}

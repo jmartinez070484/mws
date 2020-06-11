@@ -1,0 +1,82 @@
+@import "lib/normalize";
+
+div,p,a,span,em,strong,img,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,td,tr,form,fieldset,label,select,checkbox,input,textarea {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+img { max-width: 100%; }
+
+* {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+@import "partials/fonts";
+@import "partials/vars";
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: $default;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.45;
+	color: $text;
+}
+.gray-bg { background-color: $bg; }
+
+.image-page {
+	width: 100%;
+	height: auto;
+	margin-bottom: 20px;
+}
+
+.animate  {
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+
+.accent-bg {
+	background-color: $accent;
+	.read-more-btn {
+		color: white;
+		&:after {
+			border-color: transparent transparent transparent white;
+		}
+	}
+}
+
+.hide-mobile {
+	@media only screen and (max-width: 768px) {
+		display: none;
+	}
+}
+
+@import "lib/grid"; //grid bootstrap4
+
+@import "partials/slick.css";
+@import "partials/slick-theme.css";
+
+@import "partials/_typography.scss";
+
+@import "partials/sliders";
+@import "partials/accordion";
+@import "partials/header-page";
+@import "partials/modal";
+@import "partials/breadcrumbs";
+@import "partials/inputs";
+@import "partials/video";
+@import "partials/image";
+@import "partials/stars";
+@import "partials/btns";
+@import "partials/lists";
+@import "partials/share-nav";
+
+@import "partials/_header.scss";
+@import "partials/_widget";
+@import "partials/_contents.scss";
+@import "partials/_footer.scss";

@@ -1,0 +1,90 @@
+.btn {
+  display: inline-block;
+  width: 220px;
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  background: #88C4C5;
+  font-family: $default;
+  border: none;
+  outline: none;
+  @extend.animate;
+  &:hover {
+    background: #1C1C1C;
+  }
+}
+.btn-wide {
+  @extend .btn;
+  width: 100%;
+}
+
+.btn-black {
+  @extend .btn;
+  background: black;
+
+}
+
+.read-more-btn, .back-btn {
+  @extend.animate;
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  line-height: 19px;
+  text-decoration: none;
+  color: #1C1C1C;
+  position: relative;
+  &:after {
+    @extend.animate;
+    content: "";
+    position: absolute;
+    top: 50%;
+    margin-top: -5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+}
+
+.read-more-btn  {
+  &:after {
+    right: -10px;
+    border-width: 5px 0 5px 5px;
+    border-color: transparent transparent transparent #1c1c1c;
+  }
+  &:hover {
+    color: $accent;
+    &:after {
+      border-color: transparent transparent transparent $accent;
+    }
+  }
+}
+
+.back-btn {
+  padding-left: 20px;
+  &:after {
+    left: 0;
+    border-width: 5px 5px 5px 0;
+    border-color: transparent #1c1c1c transparent transparent;
+  }
+  &:hover {
+    color: $accent;
+    &:after {
+      border-color: transparent $accent transparent transparent;
+    }
+  }
+}
+
+.view-delails-btn {
+  color: $text;
+  text-decoration: none;
+  @extend.animate;
+  &:hover {
+    color: $accent;
+  }
+}

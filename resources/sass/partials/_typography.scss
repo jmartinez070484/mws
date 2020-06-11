@@ -1,0 +1,121 @@
+h1, h2, .widget-title, .like-h2, .like-bold, h3, p {
+  margin-bottom: 20px;
+  color: $text;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 44px;
+}
+
+.like-h1 {
+  @extend h1;
+}
+
+h2, .widget-title {
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.like-h2 {
+ @extend h2;
+}
+
+.like-bold {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.header-section {
+  margin-bottom: 50px;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.small-text {
+  font-size: 14px;
+}
+
+.margin-b-none {
+  margin-bottom: 0;
+}
+
+.contact-link {
+  display: block;
+  color: $text;
+  text-decoration: none;
+  text-underline: none;
+  margin-bottom: 20px;
+}
+
+.border-above {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 94px;
+    height: 2px;
+    background-color: $accent;
+  }
+}
+
+.border-under {
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 94px;
+    height: 2px;
+    background: #88C4C5;
+  }
+}
+
+.date-post {
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  margin-bottom: 20px;
+  span {
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: normal;
+  }
+}
+
+time {
+  display: inline-block;
+  margin-bottom: 20px;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+address {
+  margin-bottom: 20px;
+  font-style: normal;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+
