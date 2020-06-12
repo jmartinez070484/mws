@@ -27,7 +27,7 @@
 						<img src="https://cdn.trivita.com/US/EN/images/products/{{ $product -> product_id }}-lrg.png" alt="{{ $product -> name }}">
 					</div>
 					<div class="block-text">
-						<h3 class="product-name border-under">{{ $product['Product']['Description'] }}</h3>
+						<h3 class="product-name border-under">{{ $product -> name }}</h3>
 						<div class="detail-block">
 							<p class="price">Price: ${{ $product -> retail_price }}</p>
 							<a href="{{ route('product',$product -> slug) }}" class="view-delails-btn">View Detials</a>

@@ -116,6 +116,10 @@ class Controller extends BaseController
 		
 		$title = $product -> name;
 
+		if(!is_array($product -> equivalents)){
+			$product -> equivalents = [];
+		}
+
 		if(count($product -> equivalents) > 0){
 			array_push($equivalents,$product);
 		}
