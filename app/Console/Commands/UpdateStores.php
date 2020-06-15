@@ -13,7 +13,7 @@ class UpdateStores extends Command
      *
      * @var string
      */
-    protected $signature = 'stores:update';
+    protected $signature = 'stores:update {--queue}';
 
     /**
      * The console command description.

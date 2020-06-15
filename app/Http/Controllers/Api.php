@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Post;
@@ -16,7 +17,22 @@ class Api extends Controller
     */
     public function __construct()
     {
-        $this->middleware(['check.domain','auth:sanctum']);
+        $this->middleware(['auth:sanctum']);
+    }
+
+    /*
+
+        Stores
+
+    */
+    public function stores(Request $request){
+        $response = ['success'=>true];  
+
+        $exitCode = Artisan::call('stores:update',[
+            '--queue'=>'default'
+        ]);
+
+        return response($response);
     }
 
     /*
@@ -50,7 +66,6 @@ class Api extends Controller
     */
     public function products(Request $request,Store $store){
         $store -> apiProductListUpdate();
-        $store -> products;
         $response = ['success'=>true,'store'=>$store];  
 
         return response($response);

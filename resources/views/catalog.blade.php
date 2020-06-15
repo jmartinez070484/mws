@@ -25,6 +25,7 @@
 				<div class="product-card">
 					<div class="image-container">
 						<img src="https://cdn.trivita.com/US/EN/images/products/{{ $product -> product_id }}-lrg.png" alt="{{ $product -> name }}">
+						<a href="{{ route('product',$product -> slug) }}"></a>
 					</div>
 					<div class="block-text">
 						<h3 class="product-name border-under">{{ $product -> name }}</h3>

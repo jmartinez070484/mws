@@ -118,7 +118,24 @@ class Store extends Model
 					if(in_array($socialMediaName,$validSocialMedia)){
 						$this -> $socialMediaName = $socialMediaItem['URL'];
 					}
+				};
+
+				$mediaId = isset($response['Settings']['MediaID']) ? $response['Settings']['MediaID'] : null;
+				
+				if($mediaId){
+					$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Media/'.$mediaId);
+
+					if($httpRequest -> ok()){
+						$response = $httpRequest -> json();
+						$mediaUrl = isset($response['URL']) ? $response['URL'] : null;
+						
+						if($mediaUrl){
+							$this -> media = $mediaUrl;
+						}
+					}
 				}
+
+				$this -> save();
 
 				$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$response['ID'].'/Article/Story/1/1/1');
 
@@ -130,8 +147,6 @@ class Store extends Model
 						$this -> story = $story;
 					}
 				}
-
-				$this -> save();
 			}
     	}
     }

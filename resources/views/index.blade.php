@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="hero-section">
+<section class="hero-section" @if($store -> media) style="background:url('{{ $store -> media }}') no-repeat center center/cover;" @endif>
 	<h1>{{ $store -> name }} <span>Wellness Store</span></h1>
 </section>
 

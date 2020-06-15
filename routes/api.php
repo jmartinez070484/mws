@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/user','Api@user');
-Route::get('/store/{store}','Api@store') -> where('store','[0-9]+');
-Route::get('/store/{store}/feed','Api@feed') -> where('store','[0-9]+');
-Route::get('/store/{store}/products','Api@products') -> where('store','[0-9]+');
+Route::post('/stores','Api@stores');
+Route::post('/stores/{store}','Api@store') -> where('store','[0-9]+');
+Route::post('/stores/{store}/feed','Api@feed') -> where('store','[0-9]+');
+Route::post('/stores/{store}/products','Api@products') -> where('store','[0-9]+');
