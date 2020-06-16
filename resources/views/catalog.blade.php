@@ -25,13 +25,13 @@
 				<div class="product-card">
 					<div class="image-container">
 						<img src="https://cdn.trivita.com/US/EN/images/products/{{ $product -> product_id }}-lrg.png" alt="{{ $product -> name }}">
-						<a href="{{ route('product',$product -> slug) }}"></a>
+						<a href="{{ $mws -> default ? route('mws_product',['site'=>$store -> site,'product'=>$product -> slug]) : route('product',$product -> slug) }}"></a>
 					</div>
 					<div class="block-text">
 						<h3 class="product-name border-under">{{ $product -> name }}</h3>
 						<div class="detail-block">
 							<p class="price">Price: ${{ $product -> retail_price }}</p>
-							<a href="{{ route('product',$product -> slug) }}" class="view-delails-btn">View Detials</a>
+							<a href="{{ $mws -> default ? route('mws_product',['site'=>$store -> site,'product'=>$product -> slug]) : route('product',$product -> slug) }}" class="view-delails-btn">View Detials</a>
 						</div>
 						<a href="#" data-product="{{ $product -> name }}" data-id="{{ $product -> product_id }}" data-price="{{ $product -> net_price ? $product -> net_price : $product -> retail_price }}" onclick="return addToCart(this,true,true)" class="btn-wide">Add to cart</a>
 					</div>

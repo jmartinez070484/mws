@@ -38,27 +38,31 @@ class Controller extends BaseController
 		$mws = Mws::instance();
 		$store = $mws -> store;
 		
-		try{
-			$productList = $store -> products ? json_decode($store -> products -> content) : [];
-		}catch(Exception $exception){
-			$productList = [];
-		}
-		
-		$products = [];
-		
-		foreach($productList as $productItem){
-			$product = Product::where('product_id',$productItem -> Product -> ID) -> first();
+		if($store){
+			try{
+				$productList = $store -> products ? json_decode($store -> products -> content) : [];
+			}catch(Exception $exception){
+				$productList = [];
+			}
+			
+			$products = [];
+			
+			foreach($productList as $productItem){
+				$product = Product::where('product_id',$productItem -> Product -> ID) -> first();
 
-			if($product){
-				array_push($products,$product);
+				if($product){
+					array_push($products,$product);
 
-				if(count($products) > 3){
-					break;
+					if(count($products) > 3){
+						break;
+					}
 				}
 			}
-		}
 
-		return view('index',compact('store','products'));
+			return view('index',compact('mws','store','products'));
+		}else{
+			return view('landing');
+		}
 	}
 
 	/*
@@ -90,7 +94,7 @@ class Controller extends BaseController
 
 		$title = 'Products';
 		
-		return view('catalog',compact('title','store','categories','products'));
+		return view('catalog',compact('mws','title','store','categories','products'));
 	}
 
 	/*
@@ -99,6 +103,24 @@ class Controller extends BaseController
 
     */
 	public function product(Product $product){
+		return $this -> single_product($product);
+	}
+
+	/*
+
+		Product
+
+    */
+	public function mws_product($site, Product $product){
+		return $this -> single_product($product);
+	}
+
+	/*
+
+		Single Product
+
+	*/
+	public function single_product(Product $product){
 		$mws = Mws::instance();
 		$store = $mws -> store;
 		$keys = ['seals','categories','cross_sell','faq','popular','equivalents','references'];
@@ -132,7 +154,7 @@ class Controller extends BaseController
 			}
 		}
 
-		return view('product',compact('title','store','product','equivalents'));
+		return view('product',compact('mws','title','store','product','equivalents'));
 	}
 
 	/*
@@ -143,9 +165,9 @@ class Controller extends BaseController
 	public function blog(){
 		$mws = Mws::instance();
 		$store = $mws -> store;
-		$title = 'blog';
+		$title = 'Blog';
 
-		return view('blog',compact('title','store'));
+		return view('blog',compact('mws','title','store'));
 	}
 
 	/*
@@ -153,13 +175,30 @@ class Controller extends BaseController
 		Post
 
     */
-	public function post(Request $request,Post $post){
+	public function post(Post $post){
+		return $this -> single_post($post);
+	}
+
+	/*
+
+		Post
+
+    */
+	public function mws_post($site, Post $post){
+		return $this -> single_post($post);
+	}
+
+	/* 
+
+
+	*/
+	public function single_post(Post $post){
 		$mws = Mws::instance();
 		$store = $mws -> store;
 		$recent = Post::where('active',1) -> where('post_id','!=',$post -> post_id) -> orderBy('created_at','desc') -> take(4) -> get();
 		$title = $post -> name;
 		
-		return view('post',compact('title','store','post','recent'));
+		return view('post',compact('mws','title','store','post','recent'));
 	}
 
 	/*
@@ -174,7 +213,7 @@ class Controller extends BaseController
 			$mws = Mws::instance();
 			$store = $mws -> store;
 
-			return view('content',compact('element','store'));
+			return view('content',compact('mws','element','store'));
 		}else{
 			abort(404);
 		}	

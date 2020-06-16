@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/user','Api@user');
 Route::post('/stores','Api@stores');
 Route::post('/stores/{store}','Api@store') -> where('store','[0-9]+');

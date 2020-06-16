@@ -107,6 +107,7 @@ class Store extends Model
 				$this -> source_id = $response['SourceID'];
 				$this -> specials = isset($response['Settings']['DisplaySpecials']) ? $response['Settings']['DisplaySpecials'] : 0;
 				$this -> domain = $response['Settings']['Domain'];
+				$this -> site = $response['Settings']['SiteAddress'];
 				$this -> name = $response['Settings']['Title'];
 				$this -> color = $response['Settings']['Color'];
 				$this -> fb_pixel = isset($response['Settings']['FBPixel']) ? isset($response['Settings']['FBPixel']) : null;

@@ -31,12 +31,12 @@
 		<div class="menu_content">
 			<ul class="nav">
 				<li class="nav_item">
-					<a href="/">My Wellness Story</a></li>
+					<a href="{{ $mws -> default ? route('mws_index',['site'=>$store -> site]) : route('index') }}">My Wellness Story</a></li>
 				<li class="nav_item">
-					<a href="/products">Products</a>
+					<a href="{{ $mws -> default ? route('mws_catalog',['site'=>$store -> site]) : route('catalog') }}">Products</a>
 				</li>
 				<li class="nav_item">
-					<a href="/blog">Blog</a>
+					<a href="{{ $mws -> default ? route('mws_blog',['site'=>$store -> site]) : route('blog') }}">Blog</a>
 				</li>
 				<li class="nav_item">
 					<a href="#" onclick="return redirectToCart()">Cart</a>
@@ -51,7 +51,7 @@
 					<li><a href="{{ $store -> youtube }}" class="youtube-icon"></a></li>
 					@endif
 				</ul>
-				<a href="{{ route('clinic') }}" class="header-btn">TriVita Clinic of Integrative Medicine</a>
+				<a href="{{ $mws -> default ? route('mws_clinic',['site'=>$store -> site]) : route('clinic') }}" class="header-btn">TriVita Clinic of Integrative Medicine</a>
 			</div>
 		</div>
 		<div class="burger">
@@ -73,9 +73,9 @@
 <footer class="main-footer">
 	<div class="container">
 		<ul class="footer-nav">
-			<li><a href="{{ route('policy') }}">Privacy Policy</a></li>
-			<li><a href="{{ route('terms') }}">Terms of Use</a></li>
-			<li><a href="{{ route('contact') }}">Contact Us</a></li>
+			<li><a href="{{ $mws -> default ? route('mws_policy',['site'=>$store -> site]) : route('policy') }}">Privacy Policy</a></li>
+			<li><a href="{{ $mws -> default ? route('mws_terms',['site'=>$store -> site]) : route('terms') }}">Terms of Use</a></li>
+			<li><a href="{{ $mws -> default ? route('mws_contact',['site'=>$store -> site]) : route('contact') }}">Contact Us</a></li>
 		</ul>
 		<p class="copyright-year">©{{ date('Y') }}</p>
 		<p class="copyright-brand">Powered By TriVita</p>

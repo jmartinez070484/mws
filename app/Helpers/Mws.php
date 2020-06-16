@@ -10,6 +10,7 @@ use App\Store;
 class Mws {
 
 	private static $instance;
+	public $default;
 	public $store;
 	public $feed;
 
@@ -18,16 +19,30 @@ class Mws {
 		Object construct
 
 	*/
-	function __construct($request){
+	function __construct(Request $request){
 		$domain = $request -> getHttpHost();
-		$store = Store::where('domain',$domain) -> first();
+		$mwsDefault = $domain === env('APP_DEFAULT_DOMAIN') ? true : false;
+
+		if($mwsDefault && !$request -> is('/')){
+			$path = explode('/',$request -> path());
+			
+			if(count($path) > 0){
+				$domain = $path[0];
+			}
+		}
+
+		$store = $mwsDefault ? Store::where('site',$domain) -> first() : Store::where('domain',$domain) -> first();
 		
 		if(!$store){
 			$store = new Store;
 			$store -> domain = $domain;
-			$store -> apiUpdate();
+			
+			if(!$mwsDefault){
+				$store -> apiUpdate();
+			}
 		}
 		
+		$this -> default = $mwsDefault;
 		$this -> store = $store -> id ? $store : null;
 	}
 

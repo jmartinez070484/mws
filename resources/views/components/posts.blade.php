@@ -19,7 +19,7 @@
 						<div class="article-entry">
 							<h3 class="border-under">{{ $post -> name }}</h3>
 							<p>{{ $post -> excerpt }}</p>
-							<a href="{{ route('post',['post'=>$post -> slug]) }}" class="read-more-btn">Read more</a>
+							<a href="{{ $mws -> default ? route('mws_post',['site'=>$mws -> store ->  site,'post'=>$post -> slug]) : route('post',['post'=>$post -> slug]) }}" class="read-more-btn">Read more</a>
 						</div>
 					</article>
 					@endforeach
