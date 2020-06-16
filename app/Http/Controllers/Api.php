@@ -77,7 +77,7 @@ class Api extends Controller
 		Post
 
     */
-	public function post(Request $request,Post $post){
+	public function post(Request $request, Post $post){
         $id = $request -> route() -> parameter('id');
         $post = Post::where('post_id',$id) -> first();
         

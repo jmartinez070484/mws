@@ -175,7 +175,7 @@ class Controller extends BaseController
 		Post
 
     */
-	public function post(Post $post){
+	public function post(Request $request,Post $post){
 		return $this -> single_post($post);
 	}
 
