@@ -21,4 +21,4 @@ Route::post('/stores','Api@stores');
 Route::post('/stores/{store}','Api@store') -> where('store','[0-9]+');
 Route::post('/stores/{store}/feed','Api@feed') -> where('store','[0-9]+');
 Route::post('/stores/{store}/products','Api@products') -> where('store','[0-9]+');
-Route::post('/stores/{store}/posts','Api@posts') -> where('store','[0-9]+');
+Route::post('/stores/{store}/posts','Api@blog_post') -> where('store','[0-9]+');
