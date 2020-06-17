@@ -5,8 +5,8 @@
 <div class="breadcrumbs">
 	<div class="container-md">
 		<p>
-			<a href="{{ $mws -> default ? route('mws_index') : route('index') }}">Home</a>
-			<a href="{{ $mws -> default ? route('mws_blog') : route('blog') }}">Blog</a>
+			<a href="{{ $mws -> default ? route('mws_index',['site'=>$store -> site]) : route('index') }}">Home</a>
+			<a href="{{ $mws -> default ? route('mws_blog',['site'=>$store -> site]) : route('blog') }}">Blog</a>
 			<span class="current">{{ $post -> name }}</span>
 		</p>
 	</div>
@@ -23,7 +23,7 @@
 				{!! $post -> content !!}
 
 				<div class="article-footer">
-					<a href="{{ $mws -> default ? route('mws_blog') : route('blog') }}" class="back-btn">Back to Blog</a>
+					<a href="{{ $mws -> default ? route('mws_blog',['site'=>$store -> site]) : route('blog') }}" class="back-btn">Back to Blog</a>
 
 					<div class="share-nav">
 						<p class="label-share">Share This</p>
