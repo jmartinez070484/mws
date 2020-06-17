@@ -76,7 +76,7 @@ class Api extends Controller
         Products
 
     */
-    public function posts(Request $request,Store $store){
+    public function blog_post(Request $request,Store $store){
         $store -> apiPostsUpdate();
         $response = ['success'=>true,'store'=>$store];  
 
@@ -89,7 +89,7 @@ class Api extends Controller
 		Post
 
     */
-	public function blog_post(Request $request, Post $post){
+	public function trivita_post(Request $request, Post $post){
         $id = $request -> route() -> parameter('id');
         $post = Post::where('post_id',$id) -> first();
         
