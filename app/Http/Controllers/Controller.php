@@ -215,6 +215,8 @@ class Controller extends BaseController
 				array_push($recent,$recentPost);
 			}
 
+			$title = $post -> name;
+
 			return view('post',compact('mws','title','store','post','recent'));
 		}else{
 			abort(404);
