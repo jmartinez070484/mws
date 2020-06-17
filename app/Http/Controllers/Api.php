@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Store;
+use App\TrivitaPost;
 
 class Api extends Controller
 {
@@ -18,6 +20,46 @@ class Api extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum']);
+    }
+
+    /*
+
+        Trivita API blog posts
+
+    */
+    public function trivita_post(Request $request,$id){
+        $response = ['success'=>false,'id'=>$id]; 
+
+        if($id){
+            $httpRequestPosts = Http::get(env('TRIVITA_API_POSTS').$id);
+            
+            if($httpRequestPosts -> ok()){
+                $post = $httpRequestPosts -> json();
+
+                if(isset($post['success']) && $post['success']){
+                    $postData = $post['post'];
+                    $post = TrivitaPost::find($postData['ID']);
+
+                    if(!$post){
+                        $post = new TrivitaPost;
+                        $post -> id = $postData['ID'];
+                    }
+
+                    $post -> created_at = $postData['post_date'];
+                    $post -> name = $postData['post_title'];
+                    $post -> slug = $postData['post_name'];
+                    $post -> excerpt = $postData['post_excerpt'];
+                    $post -> content = $postData['post_content'];
+                    $post -> image = isset($postData['featured_image']) ? $postData['featured_image'] : null;
+                    $post -> save();
+
+                    $response['success'] = true;
+                    $response['post'] = $post;
+                }
+            }
+        }
+
+        return response($response);
     }
 
     /*
@@ -83,31 +125,9 @@ class Api extends Controller
         return response($response);
     }
 
-
     /*
 
-		Post
-
-    */
-	public function trivita_post(Request $request, Post $post){
-        $id = $request -> route() -> parameter('id');
-        $post = Post::where('post_id',$id) -> first();
-        
-        if(!$post){
-            $post = new Post;
-            $post -> post_id = $id;
-        }
-
-        $post -> apiUpdate();
-
-		$response = ['success'=>true,'post'=>$post];
-
-		return response($response);
-	}
-
-    /*
-
-        Index
+        User
 
     */
     public function user(Request $request){
