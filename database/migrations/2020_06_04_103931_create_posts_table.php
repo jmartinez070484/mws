@@ -14,15 +14,16 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id');
             $table->timestamps();
             $table->integer('active')->default(1);
-            $table->integer('post_id')->nullable();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->text('excerpt')->nullable();
+            $table->integer('type')->default(1);
+            $table->bigInteger('store_id');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->bigInteger('trivita_post_id')->nullable();
+            $table->string('name')->nullable();
             $table->longText('content')->nullable();
-            $table->mediumText('image')->nullable();
+            $table->text('image')->nullable();
         });
     }
 

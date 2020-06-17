@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use App\Post;
+use App\TrivitaPost;
 
 class UpdatePosts extends Command
 {
@@ -58,11 +58,11 @@ class UpdatePosts extends Command
                 $posts = $httpRequestPosts -> json();
 
                 foreach($posts['posts'] as $postData){
-                    $post = Post::where('post_id',$postData['ID']) -> first();
+                    $post = TrivitaPost::find($postData['ID']);
 
                     if(!$post){
-                        $post = new Post;
-                        $post -> post_id = $postData['ID'];
+                        $post = new TrivitaPost;
+                        $post -> id = $postData['ID'];
                     }
 
                     $post -> created_at = $postData['post_date'];

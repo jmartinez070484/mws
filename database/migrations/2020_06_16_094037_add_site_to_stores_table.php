@@ -26,7 +26,7 @@ class AddSiteToStoresTable extends Migration
     public function down()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->string('site');
+            $table->dropColumn('site');
         });
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
 use App\Feed;
 use App\ProductList;
+use App\Post;
 
 class Store extends Model
 {
@@ -28,6 +29,62 @@ class Store extends Model
 	public function feed(){
 		return $this->hasMany(Feed::class,'store_id','id') -> orderBy('created_at','DESC');
 	}
+
+	/*
+
+		Update posts via API
+
+    */
+    public function apiPostsUpdate($loop = null){
+    	if($this -> id){
+    		$page = 1;
+    		
+    		while($page){
+    			$page = $loop ? $this -> postsUpdateLoops($page) : 0;
+    		}
+		}
+    }
+
+    /*
+
+		Update posts via API
+
+    */
+    private function postsUpdateLoops($page){
+    	$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Blog/1/50/'.$page);
+
+		if($httpRequest -> ok()){
+			$response = $httpRequest -> json();
+			
+			if($response){
+				$posts = isset($response['Result']) ? $response['Result'] : [];
+
+				foreach($posts as $postData){
+					$post = Post::find($postData['ID']);
+					
+					if(!$post){
+						$post = new Post;
+						$post -> id = $postData['ID'];
+					}
+
+					$post -> created_at = $postData['CreateDate'];
+					$post -> type = isset($postData['WPBlogID']) ? 2 : 1;
+					$post -> store_id = $this -> id;
+					$post -> name = isset($postData['Title']) ? $postData['Title'] : null;
+					$post -> content = $postData['Content'];
+					$post -> image = isset($postData['Media'][0]['URL']) ? $postData['Media'][0]['URL'] : null;
+
+					if($post -> type === 2){
+						$post -> trivita_post_id = $postData['WPBlogID'];
+					}
+
+					$post -> save();
+				}
+			}
+		}
+
+		return isset($response['TotalPages']) && $page + 1 < $response['TotalPages'] ? $page + 1 : 0;
+    }
 
 	/*
 

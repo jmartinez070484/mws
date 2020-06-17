@@ -26,7 +26,7 @@ class AddMediaToStoresTable extends Migration
     public function down()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->text('media');
+            $table->dropColumn('media');
         });
     }
 }

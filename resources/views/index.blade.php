@@ -31,7 +31,7 @@
 					@foreach($products as $product)
 					<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
 						<div class="product-card top-product">
-							<a href="{{ route('product',['product'=>$product -> slug]) }}" class="wrap-product">
+							<a href="{{ $mws -> default ? route('mws_product',['site'=>$store -> site,'product'=>$product -> slug]) : route('product',$product -> slug) }}" class="wrap-product">
 								<div class="image-container">
 									<img src="https://cdn.trivita.com/US/EN/images/products/{{ $product -> product_id }}-lrg.png" alt="{{ $product -> name }}" />
 								</div>
@@ -47,7 +47,7 @@
 				</div>
 
 				<div class="wrap-btn text-center">
-					<a href="{{ route('catalog') }}" class="btn">Show more</a>
+					<a href="{{ $mws -> default ? route('mws_catalog') : route('catalog') }}" class="btn">Show more</a>
 				</div>
 			</div>
 			

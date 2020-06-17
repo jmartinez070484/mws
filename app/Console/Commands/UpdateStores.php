@@ -13,7 +13,7 @@ class UpdateStores extends Command
      *
      * @var string
      */
-    protected $signature = 'stores:update {--queue}';
+    protected $signature = 'stores:update {posts} {--queue}';
 
     /**
      * The console command description.
@@ -40,6 +40,7 @@ class UpdateStores extends Command
     public function handle()
     {
         $httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store');
+        $posts = $this->argument('posts');
 
         if($httpRequest -> ok()){
             $stores = $httpRequest -> json();
@@ -58,6 +59,11 @@ class UpdateStores extends Command
                     $store -> apiUpdate();
                     $store -> apiFeedUpdate();
                     $store -> apiProductListUpdate();
+
+                    if($posts){
+                        $store -> apiPostsUpdate(true);
+                        $this->info($store -> name.' - Store Posts Updated!');
+                    }
 
                     $this->info($store -> name.' - Store Updated!');
                 }

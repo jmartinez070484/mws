@@ -71,6 +71,18 @@ class Api extends Controller
         return response($response);
     }
 
+    /*
+
+        Products
+
+    */
+    public function posts(Request $request,Store $store){
+        $store -> apiPostsUpdate();
+        $response = ['success'=>true,'store'=>$store];  
+
+        return response($response);
+    }
+
 
     /*
 

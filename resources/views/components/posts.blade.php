@@ -19,12 +19,18 @@
 						<div class="article-entry">
 							<h3 class="border-under">{{ $post -> name }}</h3>
 							<p>{{ $post -> excerpt }}</p>
-							<a href="{{ $mws -> default ? route('mws_post',['site'=>$mws -> store ->  site,'post'=>$post -> slug]) : route('post',['post'=>$post -> slug]) }}" class="read-more-btn">Read more</a>
+							@if(isset($post -> reference_id))
+							<a href="{{ $mws -> default ? route('mws_post',['site'=>$mws -> store ->  site,'id'=>$post -> reference_id]) : route('post',['id'=>$post -> reference_id]) }}" class="read-more-btn">Read more</a>
+							@else
+							<a href="{{ $mws -> default ? route('mws_post',['site'=>$mws -> store ->  site,'id'=>$post -> id]) : route('post',['id'=>$post -> id]) }}" class="read-more-btn">Read more</a>
+							@endif
 						</div>
 					</article>
 					@endforeach
-					
 				</div>
+				@if($pagination)
+				{{ $posts -> links() }}
+				@endif
 			</div>
 		</div>
 	</div>

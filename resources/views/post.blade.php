@@ -5,8 +5,8 @@
 <div class="breadcrumbs">
 	<div class="container-md">
 		<p>
-			<a href="#">Home</a>
-			<a href="#">Blog</a>
+			<a href="{{ $mws -> default ? route('mws_index') : route('index') }}">Home</a>
+			<a href="{{ $mws -> default ? route('mws_blog') : route('blog') }}">Blog</a>
 			<span class="current">{{ $post -> name }}</span>
 		</p>
 	</div>
@@ -23,7 +23,7 @@
 				{!! $post -> content !!}
 
 				<div class="article-footer">
-					<a href="{{ route('blog') }}" class="back-btn">Back to Blog</a>
+					<a href="{{ $mws -> default ? route('mws_blog') : route('blog') }}" class="back-btn">Back to Blog</a>
 
 					<div class="share-nav">
 						<p class="label-share">Share This</p>
@@ -53,7 +53,11 @@
 					<article class="border-above">
 						<h3>{{ $post -> name }}</h3>
 						<p>{{ $post -> excerpt }}</p>
-						<a href="{{ route('post',['post' => $post -> slug]) }}" class="read-more-btn">Read more</a>
+						@if(isset($post -> reference_id))
+						<a href="{{ $mws -> default ? route('mws_post',['site'=>$mws -> store ->  site,'id'=>$post -> reference_id]) : route('post',['id'=>$post -> reference_id]) }}" class="read-more-btn">Read more</a>
+						@else
+						<a href="{{ $mws -> default ? route('mws_post',['site'=>$mws -> store ->  site,'id'=>$post -> id]) : route('post',['id'=>$post -> id]) }}" class="read-more-btn">Read more</a>
+						@endif
 					</article>
 					@endforeach
 

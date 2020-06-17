@@ -2,7 +2,7 @@
 
 @section('content')
 
-<x-posts limit="4" />
+<x-posts limit="4" pagination="1" />
 
 <!--aside only mobile-->
 <div class="wrapper-aside-mobile">

@@ -175,8 +175,8 @@ class Controller extends BaseController
 		Post
 
     */
-	public function post(Request $request,Post $post){
-		return $this -> single_post($post);
+	public function post(Request $request,$id){
+		return $this -> single_post($id);
 	}
 
 	/*
@@ -184,21 +184,41 @@ class Controller extends BaseController
 		Post
 
     */
-	public function mws_post($site, Post $post){
-		return $this -> single_post($post);
+	public function mws_post($site, $id){
+		return $this -> single_post($id);
 	}
 
 	/* 
 
 
 	*/
-	public function single_post(Post $post){
+	public function single_post($id){
 		$mws = Mws::instance();
 		$store = $mws -> store;
-		$recent = Post::where('active',1) -> where('post_id','!=',$post -> post_id) -> orderBy('created_at','desc') -> take(4) -> get();
-		$title = $post -> name;
+		$recent = [];
+		$post = Post::where('id',$id) -> where('store_id',$store -> id) -> first();
+
+		if($post -> type === 2){
+			$post = $post -> trivita_post;
+		}
 		
-		return view('post',compact('mws','title','store','post','recent'));
+		if($post){
+			$recentPosts = Post::where('store_id',$store -> id) -> where('id','!=',$id) -> orderBy('created_at','DESC') -> take(4) -> get();
+			
+			foreach($recentPosts as $recentPost){
+				if($recentPost -> type === 2){
+					$recentPostId = $recentPost -> id;
+					$recentPost = $recentPost -> trivita_post;
+					$recentPost -> reference_id = $recentPostId;
+				}
+
+				array_push($recent,$recentPost);
+			}
+
+			return view('post',compact('mws','title','store','post','recent'));
+		}else{
+			abort(404);
+		}
 	}
 
 	/*
