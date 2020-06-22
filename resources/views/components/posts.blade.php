@@ -6,7 +6,6 @@
 				<h2 class="header-section text-center">{{ $title }}</h2>
 				@endif
 				<div class="articles-list js-slider-1-columns">
-
 					@foreach($posts as $post)
 					<article class="article-item">
 						@if($post -> image)
@@ -18,7 +17,7 @@
 						@endif
 						<div class="article-entry">
 							<h3 class="border-under">{{ $post -> name }}</h3>
-							<p>{{ $post -> excerpt }}</p>
+							<p>{!! $post -> type == 1 ? Helper::excerpt($post -> content,250) : $post -> excerpt !!}</p>
 							@if(isset($post -> reference_id))
 							<a href="{{ $mws -> default ? route('mws_post',['site'=>$mws -> store ->  site,'id'=>$post -> reference_id]) : route('post',['id'=>$post -> reference_id]) }}" class="read-more-btn">Read more</a>
 							@else

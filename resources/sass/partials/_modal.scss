@@ -53,6 +53,94 @@
       background:none;
     }
 
+    &.modal-contact {
+      .content {
+        position:relative;
+        max-width:500px;
+        width:100%;
+        padding:40px;
+        text-align:left;
+        background:#FFF;
+
+        i {
+          position:absolute;
+          top:40px;
+          right:40px;
+          color:#999;
+          cursor:pointer;
+          z-index:1;
+        }
+
+        strong {
+          position:relative;
+          display:block;
+          font-size:25px;
+          font-weight:600;
+          line-height:30px;
+          margin-bottom:20px;
+          padding:0 0 20px 0;
+
+          &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: inline-block;
+            width: 94px;
+            height: 2px;
+            background: #88C4C5;
+          }
+        }
+
+        form {
+          width:100%;
+
+          fieldset {
+            display:inline-block;
+            width:100%;
+            margin:12px 0 0 0;
+            border:none;
+
+            input,textarea {
+              width:100%;
+              background-color:#EDEDED;
+              padding:12px 20px;
+              font-family:"Montserrat", sans-serif;
+              border:none;
+              outline:none;
+
+              &.invalid {
+                border:1px solid #F00;
+              }
+
+              &[type="button"] {
+                width:45%;
+                color:#FFF;
+                float:left;
+                background:#000;
+                cursor:pointer;
+              }
+            }
+            textarea {
+              min-height:120px;
+            }
+            button {
+              display:inline-block;
+              color:#FFF;
+              background-color:$accent;
+              padding:12px 20px;
+              font-family:"Montserrat", sans-serif;
+              width:45%;
+              float:right;
+              border:none;
+              outline:none;
+              cursor:pointer;
+            }
+          }
+        }
+      }
+    }
+
     &.modal-cart {
       .content {
         max-width:300px;

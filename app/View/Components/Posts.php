@@ -10,7 +10,6 @@ use App\TrivitaPost;
 class Posts extends Component
 {
     public $mws;
-    public $limit;
     public $title;
     public $posts;
     public $pagination;
@@ -23,22 +22,26 @@ class Posts extends Component
     public function __construct($limit = null, $title = null, $pagination = null)
     {
         $mws = Mws::instance();
+        $store = $mws -> store;
 
         if($pagination){
-            $posts = $limit ? Post::where('active',1) -> orderBy('created_at','desc') -> paginate($limit) : Post::where('active',1) -> orderBy('created_at','desc') -> paginate(5);
+            $posts = $limit ? Post::where('active',1) -> where('store_id',$store -> id) -> orderBy('created_at','desc') -> paginate($limit) : Post::where('active',1) -> where('store_id',$store -> id) -> orderBy('created_at','desc') -> paginate(5);
         }else{
-            $posts = $limit ? Post::where('active',1) -> orderBy('created_at','desc') -> limit($limit) -> get() : Post::where('active',1) -> orderBy('created_at','desc') -> limit(5) -> get();
+            $posts = $limit ? Post::where('active',1) -> where('store_id',$store -> id) -> orderBy('created_at','desc') -> limit($limit) -> get() : Post::where('active',1) -> where('store_id',$store -> id) -> orderBy('created_at','desc') -> limit(5) -> get();
         }
-
+        
         foreach($posts as $key => $value){
             if($value -> type === 2){
-                $posts[$key] = TrivitaPost::find($value -> trivita_post_id);
-                $posts[$key] -> reference_id = $value -> id;
+                $trivitaPost = TrivitaPost::find($value -> trivita_post_id);
+
+                if($trivitaPost){
+                    $posts[$key] = $trivitaPost;
+                    $posts[$key] -> reference_id = $value -> id;
+                }
             }
         }
 
         $this -> mws = $mws;
-        $this -> limit = $limit ? $limit : 1;
         $this -> title = $title ? $title : null;
         $this -> posts = $posts ? $posts : [];
         $this -> pagination = $pagination ? true : false;

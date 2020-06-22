@@ -63,7 +63,7 @@
 							<li></li>
 							<li></li>
 						</ul>
-						<a href="#" class="number-reviews">(<span>{{ $product -> review_total }}</span> Reviews)</a>
+						<a href="#reviews" class="number-reviews">(<span>{{ $product -> review_total }}</span> Reviews)</a>
 					</div>
 					{!! $product -> short_description !!}
 				</div>
@@ -136,13 +136,13 @@
 </section>
 
 @if($product -> reviews)
-<section class="testimonials-section accent-bg">
+<section id="reviews" class="testimonials-section accent-bg">
 	<div class="container">
 		<div class="row">
 			<div class="list-testimonials col-md-10 offset-md-1">
 
 				<div class="testimonial-slider">
-					@foreach($product -> reviews -> take(5) as $review)
+					@foreach($product -> reviews as $review)
 					<div class="testimonial-item">
 						<div class="stars-block four d-flex justify-content-center" data-score="{{ $review -> score }}">
 							<ul>
@@ -157,7 +157,7 @@
 							{{ $review -> content }}
 						</p>
 					</div>
-					@endforeach	
+					@endforeach
 				</div>
 			</div>
 		</div>

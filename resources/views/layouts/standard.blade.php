@@ -7,6 +7,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <!-- css stylesheets -->
+<link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet" />
 @if($css = Helper::fileVersion('/css/app.css'))
 <link href="{{ $css }}" rel="stylesheet" type="text/css" />
 @endif
@@ -45,10 +46,16 @@
 			<div class="right-nav">
 				<ul class="social-nav">
 					@if($store -> facebook)
-					<li><a href="{{ $store -> facebook }}" class="facebook-icon"></a></li>
+					<li><a href="{{ $store -> facebook }}"><i class="fab fa-facebook-f"></i></a></li>
 					@endif
+					@if($store -> instagram)
+					<li><a href="{{ $store -> instagram }}"><i class="fab fa-instagram"></i></a></li>
+					@endif
+					@if($store -> pinterest)
+					<li><a href="{{ $store -> pinterest }}"><i class="fab fa-pinterest"></i></a></li>
+					@endif	
 					@if($store -> youtube)
-					<li><a href="{{ $store -> youtube }}" class="youtube-icon"></a></li>
+					<li><a href="{{ $store -> youtube }}"><i class="fab fa-youtube"></i></a></li>
 					@endif
 				</ul>
 				<a href="{{ $mws -> default ? route('mws_clinic',['site'=>$store -> site]) : route('clinic') }}" class="header-btn">TriVita Clinic of Integrative Medicine</a>

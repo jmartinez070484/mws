@@ -121,6 +121,83 @@ if(productSelect){
 	});
 }
 
+var contactBtn = document.querySelector('.contact-btn');
+
+if(contactBtn){
+	contactBtn.addEventListener('click',function(e){
+		e.preventDefault();
+
+		if(modal){
+			modal.style.display = 'table';
+			modal.style.opacity = 1;
+			modal.style.visibility = 'visible';
+
+			var fields = [{name:'name',type:'input',placeholder:'Name'},{name:'email',type:'input',placeholder:'Email'},{name:'subject',type:'input',placeholder:'Subject'},{name:'message',type:'textarea',placeholder:'Message'}];
+			var totalFields = fields.length;
+			var title = document.createElement('strong');
+			var form = document.createElement('form');
+			var close = document.createElement('i');
+
+			for(var x=0;x<totalFields;x++){
+				var fieldset = document.createElement('fieldset');
+				var input = document.createElement(fields[x].type);
+				
+				if(fields[x].type === 'input'){
+					input.setAttribute('type',fields[x].name === 'email' ? 'email' : 'text');
+				}
+
+				input.setAttribute('name',fields[x].name);
+				input.setAttribute('placeholder',fields[x].placeholder);
+				input.setAttribute('required','true');
+				fieldset.appendChild(input);
+				form.appendChild(fieldset);
+			}
+
+			var fieldset = document.createElement('fieldset');
+			var cancel = document.createElement('input');
+			var token = document.createElement('input');
+			var submit = document.createElement('button');
+
+			close.addEventListener('click',function(){
+				var modalNode = this.parentNode.parentNode.parentNode;
+				
+				modalNode.removeAttribute('style');
+				modalNode.firstElementChild.className = 'row';
+
+				if(modalNode.firstElementChild.firstElementChild.lastElementChild){
+				    while(modalNode.firstElementChild.firstElementChild.lastElementChild){
+				       	modalNode.firstElementChild.firstElementChild.removeChild(modalNode.firstElementChild.firstElementChild.lastElementChild);
+				       }
+				}
+			});
+			cancel.addEventListener('click',function(){
+				this.parentNode.parentNode.parentNode.firstElementChild.click();
+			});
+			
+			token.setAttribute('name','_token');
+			token.setAttribute('type','hidden');
+			token.setAttribute('value',document.querySelector('meta[name="csrf-token"]').content);
+			form.setAttribute('method','POST');
+			form.setAttribute('action',document.location.href);
+			form.setAttribute('onsubmit','return validateForm(this)');
+			form.setAttribute('novalidate','true');
+			cancel.setAttribute('type','button');
+			cancel.setAttribute('value','Cancel');
+			submit.innerText = 'Submit';
+			title.innerText = 'Send a Message';
+			close.className = 'fa fa-times';
+			fieldset.appendChild(cancel);
+			fieldset.appendChild(submit);
+			fieldset.appendChild(token);
+			form.appendChild(fieldset);
+			modal.lastElementChild.lastElementChild.appendChild(close);
+			modal.lastElementChild.lastElementChild.appendChild(title);
+			modal.lastElementChild.lastElementChild.appendChild(form);
+			modal.lastElementChild.className += ' modal-contact';
+		}
+	});
+}
+
 var accordion = document.querySelectorAll('.acc .acc-title');
 var totalAccordions = accordion.length;
 
@@ -132,6 +209,62 @@ if(totalAccordions){
 			this.className = this.className.indexOf('active') === -1 ? this.className + ' active' : this.className.replace(' active','');
 		});
 	};
+}
+
+function validateForm(_form){
+	var fields = _form.querySelectorAll('input,textarea');
+	var totalFields = fields.length;
+	var validFields = true;
+
+	if(totalFields){
+		for(var x=0;x<totalFields;x++){
+			var valid = fields[x].validity.valid;
+			
+			fields[x].className = valid ? '' : 'invalid';
+
+			if(!valid && validFields){
+				validFields = false;
+			}
+		}
+	}
+
+	if(validFields){
+		var btn = _form.querySelector('button');
+		var btnText = btn.innerText;
+		var formData = new FormData(_form);
+        var xhttp = new XMLHttpRequest();
+
+        btn.disabled = true;
+        btn.innerText = 'Please wait...';
+
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState == 4){
+                if(xhttp.status === 200){
+                    try{
+                        var response = JSON.parse(xhttp.response)
+                    }catch(e){
+                        var response = xhttp.response; 
+                    }
+                    
+                    if(response.success){
+                    	btn.innerText = 'Thank you!';
+                    }else{
+                    	alert(response.error ? response.error : 'There was an error, please contact us!');
+
+                    	btn.removeAttribute('disabled');
+        				btn.innerText = btnText;
+                    }
+                }else{
+                    throw 'invalid HTTP request: ' + xhttp.status + ' response';
+                }
+            }
+        };
+                                          
+        xhttp.open(_form.getAttribute('method'),_form.getAttribute('action'),true);
+        xhttp.send(formData);
+	}
+
+	return false;
 }
 
 function addToCart(_element){
@@ -397,3 +530,13 @@ function getCookie(cname) {
     }
     return "";
 }
+
+$('.testimonial-slider').slick({
+	autoplay: false,
+	dots: false,
+	infinite: true,
+	speed: 300,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	arrows: true,
+});

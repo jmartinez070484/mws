@@ -39,8 +39,12 @@ class Store extends Model
     	if($this -> id){
     		$page = 1;
     		
-    		while($page){
-    			$page = $loop ? $this -> postsUpdateLoops($page) : 0;
+    		if($loop){
+    			while($page){
+	    			$page = $loop ? $this -> postsUpdateLoops($page) : 0;
+	    		}
+    		}else{
+    			$this -> postsUpdateLoops($page);
     		}
 		}
     }
@@ -169,7 +173,8 @@ class Store extends Model
 				$this -> color = $response['Settings']['Color'];
 				$this -> fb_pixel = isset($response['Settings']['FBPixel']) ? isset($response['Settings']['FBPixel']) : null;
 				$this -> customer = $response['Customer'] ? json_encode($response['Customer']) : null;
-
+				$this -> story = isset($response['Settings']['Story']) ? $response['Settings']['Story'] : null;
+				
 				foreach($socialMedia as $socialMediaItem){
 					$socialMediaName = strtolower($socialMediaItem['Type']['Description']);
 
@@ -194,17 +199,6 @@ class Store extends Model
 				}
 
 				$this -> save();
-
-				$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$response['ID'].'/Article/Story/1/1/1');
-
-				if($httpRequest -> ok()){
-					$response = $httpRequest -> json();
-					$story = isset($response['Result'][0]['Content']) ? $response['Result'][0]['Content'] : null;
-
-					if($story){
-						$this -> story = $story;
-					}
-				}
 			}
     	}
     }

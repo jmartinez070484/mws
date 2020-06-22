@@ -6,17 +6,16 @@
 	<h1>{{ $store -> name }} <span>Wellness Store</span></h1>
 </section>
 
-@if($store -> story)
 <section class="intro-section">
 	<div class="container-md">
 		<div class="row">
 			<div class="col-lg-8 col-md-12">
+				<h2 class="header-section text-center">My Wellness Story</h2>
 				{!! $store -> story !!}
 			</div>
 		</div>
 	</div>
 </section>
-@endif
 
 @if($products)
 <section class="top-products-section">

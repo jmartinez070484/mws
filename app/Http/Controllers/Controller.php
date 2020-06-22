@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -153,7 +154,7 @@ class Controller extends BaseController
 				array_push($equivalents,$equivalentProduct);
 			}
 		}
-
+		
 		return view('product',compact('mws','title','store','product','equivalents'));
 	}
 
@@ -181,11 +182,37 @@ class Controller extends BaseController
 
 	/*
 
-		Post
+		MWS post
 
     */
 	public function mws_post($site, $id){
 		return $this -> single_post($id);
+	}
+
+	/*
+
+		Contact
+
+    */
+	public function contact(Request $request){
+		$postData = $request->all();
+		$response = ['success'=>false];
+
+		//validate 
+        $validator = Validator::make($postData,[
+            'name' => ['required','string'],
+            'email' => ['required','string','email'],
+            'subject' => ['required','string'],
+            'message' => ['required','string'],
+        ]);
+
+        if(!$validator -> fails()){
+        	$response['success'] = true;
+        }else{
+        	$response['error'] = $validator -> errors() ->first();
+        }
+
+		return $response;
 	}
 
 	/* 
@@ -208,8 +235,12 @@ class Controller extends BaseController
 			foreach($recentPosts as $recentPost){
 				if($recentPost -> type === 2){
 					$recentPostId = $recentPost -> id;
-					$recentPost = $recentPost -> trivita_post;
-					$recentPost -> reference_id = $recentPostId;
+					$trivitaPost = $recentPost -> trivita_post;
+
+					if($trivitaPost){
+						$recentPost = $trivitaPost;
+						$recentPost -> reference_id = $recentPostId;
+					}
 				}
 
 				array_push($recent,$recentPost);

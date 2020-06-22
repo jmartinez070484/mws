@@ -41,7 +41,7 @@
 					<p class="bold">John Sample</p>
 					<p><a class="contact-link bold" href="tel:1-480-555-1212">1.480.555.1212</a></p>
 
-					<a href="#" class="btn modal-trigger" data-modal="modal-send-message">Send  a Message</a>
+					<a href="#" class="btn contact-btn">Send  a Message</a>
 
 				</div>
 			</div>
@@ -49,34 +49,3 @@
 		<x-sidebar/>
 	</div>
 </div>
-
-<!-- Modal Send Message -->
-<div class="modal" id="modal-send-message">
-	<div class="modal-sandbox"></div>
-	<div class="modal-box">
-		<div class="modal-header">
-			<div class="close-modal js-close-modal">&times;</div>
-			<h1 class="border-under">Send a Message</h1>
-		</div>
-		<div class="modal-body">
-
-			<div class="addressee-block">
-				<p><span>To:</span> John Sample</p>
-				<p><span>From:</span></p>
-			</div>
-
-			<form action="#" class="form-modal">
-				<input type="text" name="name" placeholder="Name">
-				<input type="email" name="email" placeholder="Email">
-				<input type="text" name="Subject" placeholder="Subject">
-				<textarea name="" cols="30" rows="5" placeholder="Message"></textarea>
-
-				<div class="wrap-btn">
-					<button class="btn" type="submit">Submit</button>
-					<button class="btn-black js-close-modal">Cancel</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-	<!--  -->

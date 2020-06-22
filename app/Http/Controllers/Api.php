@@ -96,7 +96,7 @@ class Api extends Controller
     */
     public function feed(Request $request,Store $store){
         $store -> apiFeedUpdate();
-        $response = ['success'=>true,'store'=>$store];  
+        $response = ['success'=>true,'feed'=>$store -> feed -> take(20)];  
 
         return response($response);
     }
@@ -108,7 +108,14 @@ class Api extends Controller
     */
     public function products(Request $request,Store $store){
         $store -> apiProductListUpdate();
-        $response = ['success'=>true,'store'=>$store];  
+
+        try{
+            $store -> products -> content = json_decode($store -> products -> content);
+        }catch(Exception $exception){
+
+        }
+
+        $response = ['success'=>true,'products'=>$store -> products];  
 
         return response($response);
     }
@@ -120,7 +127,8 @@ class Api extends Controller
     */
     public function blog_post(Request $request,Store $store){
         $store -> apiPostsUpdate();
-        $response = ['success'=>true,'store'=>$store];  
+        $posts = Post::where('active',1) -> where('store_id',$store -> id) -> orderBy('created_at','desc') -> limit(20) -> get();
+        $response = ['success'=>true,'posts'=>$posts];  
 
         return response($response);
     }

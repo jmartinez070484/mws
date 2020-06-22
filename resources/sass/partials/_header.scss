@@ -191,32 +191,10 @@
         width: 20px;
         height: 20px;
         display: block;
-      }
-      .facebook-icon {
-        background: url("/assets/facebook-accent.png") no-repeat 50% 50%;
-        background-size: cover;
-        @extend.animate;
-        &:hover {
-          background: url("/assets/facebook-original.png") no-repeat 50% 50%;
-          background-size: cover;
-        }
-      }
-      .twitter-icon {
-        background: url("/assets/twitter-accent.png") no-repeat 50% 50%;
-        background-size: cover;
-        @extend.animate;
-        &:hover {
-          background: url("/assets/twitter-original.png") no-repeat 50% 50%;
-          background-size: cover;
-        }
-      }
-      .youtube-icon {
-        background: url("/assets/youtube-accent.png") no-repeat 50% 50%;
-        background-size: cover;
-        @extend.animate;
-        &:hover {
-          background: url("/assets/youtube-original.png") no-repeat 50% 50%;
-          background-size: cover;
+
+        i {
+          font-size:20px;
+          color:$accent;
         }
       }
     }

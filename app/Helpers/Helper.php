@@ -4,6 +4,22 @@ namespace App\Helpers;
 
 class Helper {
 
+    /*
+
+        Excerpt
+
+    */
+    static function excerpt($content,$length){
+        $text = strip_tags($content);
+
+        if(strlen($text) > $length){
+            $stringCut = substr($text,0,$length);
+            $text = substr($stringCut,0,strrpos($stringCut,' ')).'...';
+        }
+        
+        return $text;
+    }
+
 	/*
 
         Return script

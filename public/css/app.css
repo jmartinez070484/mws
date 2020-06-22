@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;
 
-0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);@import url(https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,669;0,700;0,800;0,900;1,400;1,500;1,600;1,669;1,700;1,800;1,900&display=swap);@import url(https://use.fontawesome.com/releases/v5.0.10/css/all.css);/* Slider */
+0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);@import url(https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,669;0,700;0,800;0,900;1,400;1,500;1,600;1,669;1,700;1,800;1,900&display=swap);@import url(https://use.fontawesome.com/releases/v5.13.0/css/all.css);/* Slider */
 .slick-slider
 {
     position: relative;
@@ -891,9 +891,6 @@ body {
 .product-card .block-text,
 .product-card .wrap-product,
 .right-nav .header-btn,
-.right-nav .social-nav li .youtube-icon,
-.right-nav .social-nav li .twitter-icon,
-.right-nav .social-nav li .facebook-icon,
 .nav_item a,
 .share-nav .share-fb a,
 .share-nav .share-twitter a,
@@ -6030,6 +6027,97 @@ address p {
   background: none;
 }
 
+.modal .row.modal-contact .content {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  padding: 40px;
+  text-align: left;
+  background: #FFF;
+}
+
+.modal .row.modal-contact .content i {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  color: #999;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.modal .row.modal-contact .content strong {
+  position: relative;
+  display: block;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 30px;
+  margin-bottom: 20px;
+  padding: 0 0 20px 0;
+}
+
+.modal .row.modal-contact .content strong:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  width: 94px;
+  height: 2px;
+  background: #88C4C5;
+}
+
+.modal .row.modal-contact .content form {
+  width: 100%;
+}
+
+.modal .row.modal-contact .content form fieldset {
+  display: inline-block;
+  width: 100%;
+  margin: 12px 0 0 0;
+  border: none;
+}
+
+.modal .row.modal-contact .content form fieldset input,
+.modal .row.modal-contact .content form fieldset textarea {
+  width: 100%;
+  background-color: #EDEDED;
+  padding: 12px 20px;
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  outline: none;
+}
+
+.modal .row.modal-contact .content form fieldset input.invalid,
+.modal .row.modal-contact .content form fieldset textarea.invalid {
+  border: 1px solid #F00;
+}
+
+.modal .row.modal-contact .content form fieldset input[type=button],
+.modal .row.modal-contact .content form fieldset textarea[type=button] {
+  width: 45%;
+  color: #FFF;
+  float: left;
+  background: #000;
+  cursor: pointer;
+}
+
+.modal .row.modal-contact .content form fieldset textarea {
+  min-height: 120px;
+}
+
+.modal .row.modal-contact .content form fieldset button {
+  display: inline-block;
+  color: #FFF;
+  background-color: #88C4C5;
+  padding: 12px 20px;
+  font-family: "Montserrat", sans-serif;
+  width: 45%;
+  float: right;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
 .modal .row.modal-cart .content {
   max-width: 300px;
   background: #FFF;
@@ -6496,6 +6584,14 @@ address p {
   content: "\F005";
 }
 
+.stars-block[data-score="4.5"] ul li:nth-child(5) {
+  font-weight: 900;
+}
+
+.stars-block[data-score="4.5"] ul li:nth-child(5):before {
+  content: "\F5C0";
+}
+
 .stars-block[data-score="3"] ul li:nth-child(5),
 .stars-block[data-score="3"] ul li:nth-child(4) {
   font-weight: 400;
@@ -6504,6 +6600,22 @@ address p {
 .stars-block[data-score="3"] ul li:nth-child(5):before,
 .stars-block[data-score="3"] ul li:nth-child(4):before {
   content: "\F005";
+}
+
+.stars-block[data-score="3.5"] ul li:nth-child(5) {
+  font-weight: 400;
+}
+
+.stars-block[data-score="3.5"] ul li:nth-child(5):before {
+  content: "\F005";
+}
+
+.stars-block[data-score="3.5"] ul li:nth-child(4) {
+  font-weight: 900;
+}
+
+.stars-block[data-score="3.5"] ul li:nth-child(4):before {
+  content: "\F5C0";
 }
 
 .stars-block[data-score="2"] ul li:nth-child(5),
@@ -6516,6 +6628,24 @@ address p {
 .stars-block[data-score="2"] ul li:nth-child(4):before,
 .stars-block[data-score="2"] ul li:nth-child(3):before {
   content: "\F005";
+}
+
+.stars-block[data-score="2.5"] ul li:nth-child(5),
+.stars-block[data-score="2.5"] ul li:nth-child(4) {
+  font-weight: 400;
+}
+
+.stars-block[data-score="2.5"] ul li:nth-child(5):before,
+.stars-block[data-score="2.5"] ul li:nth-child(4):before {
+  content: "\F005";
+}
+
+.stars-block[data-score="2.5"] ul li:nth-child(3) {
+  font-weight: 900;
+}
+
+.stars-block[data-score="2.5"] ul li:nth-child(3):before {
+  content: "\F5C0";
 }
 
 .stars-block[data-score="1"] ul li:nth-child(5),
@@ -6532,6 +6662,26 @@ address p {
   content: "\F005";
 }
 
+.stars-block[data-score="1.5"] ul li:nth-child(5),
+.stars-block[data-score="1.5"] ul li:nth-child(4),
+.stars-block[data-score="1.5"] ul li:nth-child(3) {
+  font-weight: 400;
+}
+
+.stars-block[data-score="1.5"] ul li:nth-child(5):before,
+.stars-block[data-score="1.5"] ul li:nth-child(4):before,
+.stars-block[data-score="1.5"] ul li:nth-child(3):before {
+  content: "\F005";
+}
+
+.stars-block[data-score="1.5"] ul li:nth-child(2) {
+  font-weight: 900;
+}
+
+.stars-block[data-score="1.5"] ul li:nth-child(2):before {
+  content: "\F5C0";
+}
+
 .stars-block[data-score="0"] ul li:nth-child(5),
 .stars-block[data-score="0"] ul li:nth-child(4),
 .stars-block[data-score="0"] ul li:nth-child(3),
@@ -6546,6 +6696,28 @@ address p {
 .stars-block[data-score="0"] ul li:nth-child(2):before,
 .stars-block[data-score="0"] ul li:nth-child(1):before {
   content: "\F005";
+}
+
+.stars-block[data-score="0.5"] ul li:nth-child(5),
+.stars-block[data-score="0.5"] ul li:nth-child(4),
+.stars-block[data-score="0.5"] ul li:nth-child(3),
+.stars-block[data-score="0.5"] ul li:nth-child(2) {
+  font-weight: 400;
+}
+
+.stars-block[data-score="0.5"] ul li:nth-child(5):before,
+.stars-block[data-score="0.5"] ul li:nth-child(4):before,
+.stars-block[data-score="0.5"] ul li:nth-child(3):before,
+.stars-block[data-score="0.5"] ul li:nth-child(2):before {
+  content: "\F005";
+}
+
+.stars-block[data-score="0.5"] ul li:nth-child(1) {
+  font-weight: 900;
+}
+
+.stars-block[data-score="0.5"] ul li:nth-child(1):before {
+  content: "\F5C0";
 }
 
 .stars-block ul {
@@ -7049,34 +7221,9 @@ address p {
   display: block;
 }
 
-.right-nav .social-nav li .facebook-icon {
-  background: url("/assets/facebook-accent.png") no-repeat 50% 50%;
-  background-size: cover;
-}
-
-.right-nav .social-nav li .facebook-icon:hover {
-  background: url("/assets/facebook-original.png") no-repeat 50% 50%;
-  background-size: cover;
-}
-
-.right-nav .social-nav li .twitter-icon {
-  background: url("/assets/twitter-accent.png") no-repeat 50% 50%;
-  background-size: cover;
-}
-
-.right-nav .social-nav li .twitter-icon:hover {
-  background: url("/assets/twitter-original.png") no-repeat 50% 50%;
-  background-size: cover;
-}
-
-.right-nav .social-nav li .youtube-icon {
-  background: url("/assets/youtube-accent.png") no-repeat 50% 50%;
-  background-size: cover;
-}
-
-.right-nav .social-nav li .youtube-icon:hover {
-  background: url("/assets/youtube-original.png") no-repeat 50% 50%;
-  background-size: cover;
+.right-nav .social-nav li a i {
+  font-size: 20px;
+  color: #88C4C5;
 }
 
 .right-nav .header-btn {
@@ -7347,9 +7494,12 @@ address p {
 
 .articles-section .article-item .article-image .image-container {
   padding-top: 72%;
+  background: none;
 }
 
 .articles-section .article-item .article-image .image-container img {
+  width: 100%;
+  height: 100%;
   float: left;
 }
 
