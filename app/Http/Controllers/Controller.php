@@ -260,8 +260,8 @@ class Controller extends BaseController
 
     */
 	public function content(Request $request){
-		$element = Str::of($request->route()->getName()) -> replace('.','-');
-
+		$element = Str::of($request->route()->getName()) -> replace('.','-') -> replace('mws_','');
+		
 		if(view() -> exists('partials.'.$element)){
 			$mws = Mws::instance();
 			$store = $mws -> store;
