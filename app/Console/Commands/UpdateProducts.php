@@ -15,7 +15,7 @@ class UpdateProducts extends Command
      *
      * @var string
      */
-    protected $signature = 'products:update';
+    protected $signature = 'products:update {--email}';
 
     /**
      * The console command description.

@@ -14,7 +14,7 @@ class UpdateStores extends Command
      *
      * @var string
      */
-    protected $signature = 'stores:update {posts} {--queue}';
+    protected $signature = 'stores:update {posts}';
 
     /**
      * The console command description.
@@ -42,7 +42,7 @@ class UpdateStores extends Command
     {
         $httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store');
         $posts = $this->argument('posts');
-
+        
         if($httpRequest -> ok()){
             $stores = $httpRequest -> json();
 
