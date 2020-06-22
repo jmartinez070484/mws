@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use App\Store;
+use App\Post;
 
 class UpdateStores extends Command
 {
@@ -61,6 +62,8 @@ class UpdateStores extends Command
                     $store -> apiProductListUpdate();
 
                     if($posts){
+                        Post::where('store_id',$store -> id) -> delete();
+
                         $store -> apiPostsUpdate(true);
                         $this->info($store -> name.' - Store Posts Updated!');
                     }
