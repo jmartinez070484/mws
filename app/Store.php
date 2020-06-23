@@ -130,7 +130,7 @@ class Store extends Model
 				$response = $httpRequest -> json();
 				$results = isset($response['Result']) ? $response['Result'] : [];
 
-				Feed::where('reference',$result['ID']) -> delete();
+				Feed::where('store_id',$this -> store_id) -> delete();
 
 				foreach($results as $result){
 					$feed = new Feed;
