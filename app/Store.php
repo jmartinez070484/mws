@@ -124,20 +124,17 @@ class Store extends Model
     */
     public function apiFeedUpdate(){
     	if($this -> id){
-    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Feed/1/10/1');
+    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Feed/1/50/1');
 
 			if($httpRequest -> ok()){
 				$response = $httpRequest -> json();
 				$results = isset($response['Result']) ? $response['Result'] : [];
 
-				foreach($results as $result){
-					$feed = Feed::where('reference',$result['ID']) -> first();
+				Feed::where('reference',$result['ID']) -> delete();
 
-					if(!$feed){
-						$feed = new Feed;
-						$feed -> reference = $result['ID'];
-					}
-					
+				foreach($results as $result){
+					$feed = new Feed;
+					$feed -> reference = $result['ID'];
 					$feed -> created_at = $result['CreateDate'];
 					$feed -> active = $result['Active'];
 					$feed -> store_id = $this -> id;
