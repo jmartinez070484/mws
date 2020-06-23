@@ -17,7 +17,7 @@ class Product extends Model
 
     */
     public function reviews(){
-        return $this->hasMany(Review::class,'product_id','product_id') -> orderBy('created_at','DESC');
+        return $this->hasMany(Review::class,'group_id','group_id') -> orderBy('created_at','DESC');
     }
 
     /*
@@ -45,6 +45,7 @@ class Product extends Model
                             $review -> created_at = $singleReview['CreateDate'];
                         }
 
+                        $review -> group_id = $reviewData['GroupID'];
                         $review -> score = $singleReview['Rank'];
                         $review -> name = $singleReview['CustFName'].' '.$singleReview['CustLInitial'];
                         $review -> content = $singleReview['Text'];
@@ -52,6 +53,7 @@ class Product extends Model
                     }
                 }
 
+                $this -> group_id = $reviewData['GroupID'];
                 $this -> review_score = $reviewData['Rounded'];
                 $this -> review_total = $reviewData['Count'];
                 $this -> save();
