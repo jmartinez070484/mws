@@ -6,7 +6,7 @@
             @if($date = \Carbon\Carbon::parse($article -> created_al))
             <p class="date-post">{{ $date -> format('M') }} <span>- {{ $date -> format('d') }}</span></p>
             @endif
-            <p>{{ $article -> content }}</p>
+            <p class="content">{{ $article -> content }}</p>
             @if(isset($article -> image))
             <img class="widget-image" src="{{ $article -> image }}" alt="">
             @endif

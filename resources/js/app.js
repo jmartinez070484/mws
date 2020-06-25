@@ -211,6 +211,29 @@ if(totalAccordions){
 	};
 }
 
+var sideContent = document.querySelectorAll('.widget p.content');
+var totalSideContent = sideContent.length;
+
+if(totalSideContent){
+	for(var x=0;x<totalSideContent;x++){
+		try{
+			var contentParse = JSON.parse(sideContent[x].innerText);
+			var totalContentParse = contentParse.length;
+
+			sideContent[x].innerText = '';
+			
+			for(var y=0;y<totalContentParse;y++){
+				sideContent[x].innerText += String.fromCodePoint(contentParse[y]);
+			}
+
+		}catch(e){
+			
+		}
+
+		sideContent[x].style.display = 'block';
+	};
+}
+
 function validateForm(_form){
 	var fields = _form.querySelectorAll('input,textarea');
 	var totalFields = fields.length;

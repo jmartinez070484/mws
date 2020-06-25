@@ -7392,6 +7392,10 @@ address p {
   }
 }
 
+.widget p.content {
+  display: none;
+}
+
 .trivita-clinic-section,
 .contact-us-section,
 .giving-back-section,
