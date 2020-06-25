@@ -63,14 +63,11 @@ class Store extends Model
 			if($response){
 				$posts = isset($response['Result']) ? $response['Result'] : [];
 
-				foreach($posts as $postData){
-					$post = Post::find($postData['ID']);
-					
-					if(!$post){
-						$post = new Post;
-						$post -> id = $postData['ID'];
-					}
+				Post::where('store_id',$this -> id) -> delete();
 
+				foreach($posts as $postData){
+					$post = new Post;
+					$post -> id = $postData['ID'];
 					$post -> created_at = $postData['CreateDate'];
 					$post -> type = isset($postData['WPBlogID']) ? 2 : 1;
 					$post -> store_id = $this -> id;
