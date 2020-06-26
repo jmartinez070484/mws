@@ -22,7 +22,7 @@ class Sidebar extends Component
         $feed = $store -> feed;
 
         $this -> store = $store;
-        $this -> feed = $feed -> take(3);
+        $this -> feed = $feed;
     }
 
     /**

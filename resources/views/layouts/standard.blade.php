@@ -12,6 +12,9 @@
 <link href="{{ $css }}" rel="stylesheet" type="text/css" />
 @endif
 
+<!-- favicon -->
+<link rel="icon" href="{{ asset('/assets/fav.png') }}" />
+
 <!--[if lt IE 9]>
 <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->

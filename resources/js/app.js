@@ -211,6 +211,33 @@ if(totalAccordions){
 	};
 }
 
+var feedItems = document.querySelectorAll('.widget .feed-container article');
+var totalFeedItems = feedItems.length;
+
+if(totalFeedItems){
+	for(var x=0;x<totalFeedItems;x++){
+		var sideContent = feedItems[x].querySelector('.widget p.content');
+		
+		if(sideContent){
+			var contentParse = JSON.parse(sideContent.innerText);
+			var totalContentParse = contentParse.length;
+
+			sideContent.innerText = '';
+			
+			for(var y=0;y<totalContentParse;y++){
+				sideContent.innerText += String.fromCodePoint(contentParse[y]);
+			}
+		}	
+	}
+
+	setTimeout(function(){
+		var maxHeight = feedItems[0].parentNode.offsetHeight;
+		
+		feedItems[0].parentNode.style.maxHeight = maxHeight + 'px';
+		feedItems[0].parentNode.className += ' scroll';
+	},500);
+}
+
 var sideContent = document.querySelectorAll('.widget p.content');
 var totalSideContent = sideContent.length;
 

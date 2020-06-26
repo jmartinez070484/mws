@@ -38,8 +38,10 @@ class Store extends Model
     public function apiPostsUpdate($loop = null){
     	if($this -> id){
     		$page = 1;
-    		
+
     		if($loop){
+    			Post::where('store_id',$this -> id) -> delete();
+    			
     			while($page){
 	    			$page = $loop ? $this -> postsUpdateLoops($page) : 0;
 	    		}
@@ -55,15 +57,13 @@ class Store extends Model
 
     */
     private function postsUpdateLoops($page){
-    	$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Blog/1/50/'.$page);
+    	$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Blog/0/50/'.$page);
 
 		if($httpRequest -> ok()){
 			$response = $httpRequest -> json();
 			
 			if($response){
 				$posts = isset($response['Result']) ? $response['Result'] : [];
-
-				Post::where('store_id',$this -> id) -> delete();
 
 				foreach($posts as $postData){
 					$post = new Post;
@@ -121,7 +121,7 @@ class Store extends Model
     */
     public function apiFeedUpdate(){
     	if($this -> id){
-    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Feed/1/50/1');
+    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Feed/0/50/1');
 
 			if($httpRequest -> ok()){
 				$response = $httpRequest -> json();

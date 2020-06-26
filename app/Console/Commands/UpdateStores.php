@@ -62,8 +62,6 @@ class UpdateStores extends Command
                     $store -> apiProductListUpdate();
 
                     if($posts){
-                        Post::where('store_id',$store -> id) -> delete();
-
                         $store -> apiPostsUpdate(true);
                         $this->info($store -> name.' - Store Posts Updated!');
                     }
