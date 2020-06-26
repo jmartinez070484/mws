@@ -7,6 +7,27 @@
   @media only screen and (max-width: 992px) {
     padding: 35px 25px;
   }
+  .feed-container {
+    width:100%;
+    overflow:auto;
+
+    article {
+      display:none;
+
+      &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+        display:block;
+      }
+    }
+
+    &.scroll {
+      overflow:auto;
+
+      article {
+        display:block;
+      }
+    }
+  }
+
   article.border-above {
     padding-top: 20px;
   }

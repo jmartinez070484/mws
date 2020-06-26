@@ -126,7 +126,7 @@ class Api extends Controller
 
     */
     public function blog_post(Request $request,Store $store){
-        $store -> apiPostsUpdate();
+        $store -> apiPostsUpdate(true);
         $posts = Post::where('active',1) -> where('store_id',$store -> id) -> orderBy('created_at','desc') -> limit(20) -> get();
         $response = ['success'=>true,'posts'=>$posts];  
 

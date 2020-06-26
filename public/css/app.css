@@ -7327,6 +7327,29 @@ address p {
   }
 }
 
+.widget .feed-container {
+  width: 100%;
+  overflow: auto;
+}
+
+.widget .feed-container article {
+  display: none;
+}
+
+.widget .feed-container article:nth-child(1),
+.widget .feed-container article:nth-child(2),
+.widget .feed-container article:nth-child(3) {
+  display: block;
+}
+
+.widget .feed-container.scroll {
+  overflow: auto;
+}
+
+.widget .feed-container.scroll article {
+  display: block;
+}
+
 .widget article.border-above {
   padding-top: 20px;
 }
