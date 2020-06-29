@@ -20,7 +20,7 @@ class Sidebar extends Component
         $mws = Mws::instance();
         $store = $mws -> store;
         $feed = $store -> feed;
-
+        
         $this -> store = $store;
         $this -> feed = $feed;
     }

@@ -7,7 +7,7 @@
             <div class="feed">
                 @foreach($feed as $article)
                 <article class="border-above">
-                    @if($date = \Carbon\Carbon::parse($article -> created_al))
+                    @if($date = \Carbon\Carbon::parse($article -> created_at))
                     <p class="date-post">{{ $date -> format('M') }} <span>- {{ $date -> format('d') }}</span></p>
                     @endif
                     <p class="content">{{ $article -> content }}</p>
