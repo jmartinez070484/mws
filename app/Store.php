@@ -95,7 +95,7 @@ class Store extends Model
     */
     public function apiProductListUpdate(){
     	if($this -> id){
-    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Product/'.$this -> id);
+    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Product');
 
 			if($httpRequest -> ok()){
 				$response = $httpRequest -> json();
