@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('products:update')->daily();
         $schedule->command('posts:update')->daily();
-        $schedule->command('stores:update 1')->daily();
+        $schedule->command('stores:update 0')->daily();
     }
 
     /**
