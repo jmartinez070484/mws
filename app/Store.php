@@ -129,7 +129,7 @@ class Store extends Model
 				$results = isset($response['Result']) ? $response['Result'] : [];
 
 				Feed::where('store_id',$this -> id) -> delete();
-				print_r($results);
+				
 				foreach($results as $result){
 					$feed = new Feed;
 					$feed -> reference = $result['ID'];
