@@ -7315,10 +7315,33 @@ address p {
 }
 
 .widget {
+  position: relative;
   padding: 35px;
   margin-bottom: 30px;
   background-color: white;
   box-shadow: 0px 4px 41px #F4F4F4;
+}
+
+.widget i.fa-caret-down,
+.widget i.fa-caret-up {
+  display: none;
+  position: absolute;
+  top: 35px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.widget i.fa-caret-down {
+  right: 40px;
+}
+
+.widget i.fa-caret-up {
+  right: 65px;
+}
+
+.widget.has-arrows i.fa-caret-down,
+.widget.has-arrows i.fa-caret-up {
+  display: block;
 }
 
 @media only screen and (max-width: 992px) {
@@ -7328,22 +7351,27 @@ address p {
 }
 
 .widget .feed-container {
+  display: inline-block;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
+}
+
+.widget .feed-container .feed {
+  width: 100%;
+  transition: all 0.35s ease-in-out;
 }
 
 .widget .feed-container article {
   display: none;
+  padding: 0;
+  width: 100%;
+  float: left;
 }
 
 .widget .feed-container article:nth-child(1),
 .widget .feed-container article:nth-child(2),
 .widget .feed-container article:nth-child(3) {
   display: block;
-}
-
-.widget .feed-container.scroll {
-  overflow: auto;
 }
 
 .widget .feed-container.scroll article {
@@ -7441,7 +7469,7 @@ address p {
 
 .hero-section {
   padding: 440px 0 0;
-  background: url("/assets/hero-img.jpg") no-repeat 50% 50%;
+  background: url("https://s3.amazonaws.com/images.mywellnessstore.com/header-default.png") no-repeat 50% 50%;
   background-size: cover;
 }
 

@@ -6,4 +6,11 @@ $text: #1C1C1C;
 $shadow: 0px 4px 41px #F4F4F4;
 $border: #C4C4C4;
 
+@mixin transition($value){
+	-webkit-transition:all $value ease-in-out;
+	-moz-transition: all $value ease-in-out;
+	-o-transition: all $value ease-in-out;
+	transition: all $value ease-in-out;
+}
+
 @import url('https://use.fontawesome.com/releases/v5.13.0/css/all.css');

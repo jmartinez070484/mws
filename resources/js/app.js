@@ -211,31 +211,85 @@ if(totalAccordions){
 	};
 }
 
-var feedItems = document.querySelectorAll('.widget .feed-container article');
-var totalFeedItems = feedItems.length;
+var feed = document.querySelector('.widget .feed-container');
 
-if(totalFeedItems){
-	for(var x=0;x<totalFeedItems;x++){
-		var sideContent = feedItems[x].querySelector('.widget p.content');
-		
-		if(sideContent){
-			var contentParse = JSON.parse(sideContent.innerText);
-			var totalContentParse = contentParse.length;
+if(feed){
+	feed.initComplete = false;
+	feed.init = function(){
+		var feed = this; 
+		var feedItems = feed.querySelectorAll('article');
+		var totalFeedItems = feedItems.length;
 
-			sideContent.innerText = '';
-			
-			for(var y=0;y<totalContentParse;y++){
-				sideContent.innerText += String.fromCodePoint(contentParse[y]);
+		if(totalFeedItems){
+			feed.parentNode.setAttribute('data-position',0);
+			feed.parentNode.setAttribute('data-total',totalFeedItems);
+			feed.parentNode.children[3].children[0].style.marginTop = 0;
+
+			for(var x=0;x<totalFeedItems;x++){
+				var sideContent = feedItems[x].querySelector('.widget p.content');
+				
+				if(sideContent){
+					var contentParse = JSON.parse(sideContent.innerText);
+					var totalContentParse = contentParse.length;
+
+					sideContent.innerText = '';
+					
+					for(var y=0;y<totalContentParse;y++){
+						sideContent.innerText += String.fromCodePoint(contentParse[y]);
+					}
+				}	
 			}
-		}	
-	}
 
-	setTimeout(function(){
-		var maxHeight = feedItems[0].parentNode.offsetHeight;
-		
-		feedItems[0].parentNode.style.maxHeight = maxHeight + 'px';
-		feedItems[0].parentNode.className += ' scroll';
-	},500);
+			if(!feed.initComplete){
+				if(totalFeedItems > 3){
+					var arrows = feed.parentNode.querySelectorAll('i.fa-caret-down, i.fa-caret-up');
+					var totalArrows = arrows.length;
+
+					if(totalArrows){
+						for(var x=0;x<totalArrows;x++){
+							arrows[x].addEventListener('click',function(){
+								var feedContainer = feed.parentNode.children[3];
+								var direction = this.className == 'fa fa-caret-down' ? true : false;
+								var position = parseInt(feedContainer.parentNode.getAttribute('data-position'));
+								var total = parseInt(feedContainer.parentNode.getAttribute('data-total'));
+								var scrollY = 0;
+
+								if(direction){
+									var nextPosition = position + 1 < total ? position + 1 : 0;
+								}else{
+									var nextPosition = position - 1 >= 0 ? position - 1 : total-1;
+								}
+								
+								for(var x=0;x<total;x++){
+									if(x < nextPosition){
+										scrollY += feedContainer.firstElementChild.children[x].offsetHeight;
+									}else{
+										break;
+									}
+								}
+
+								feedContainer.firstElementChild.style.marginTop = '-' + (scrollY) + 'px';
+
+								feed.parentNode.setAttribute('data-position',nextPosition);
+							});
+						}
+					}
+
+					feed.parentNode.className += ' has-arrows';
+				}
+			}
+
+			setTimeout(function(){
+				var maxHeight = feed.offsetHeight;
+				
+				feed.style.maxHeight = maxHeight + 'px';
+				feed.className += ' scroll';
+			},500);
+
+			feed.initComplete = true;
+		}
+	}
+	feed.init();
 }
 
 var sideContent = document.querySelectorAll('.widget p.content');

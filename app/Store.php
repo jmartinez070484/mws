@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use App\Feed;
 use App\ProductList;
 use App\Post;
@@ -170,11 +171,9 @@ class Store extends Model
 				$this -> story = isset($response['Settings']['Story']) ? $response['Settings']['Story'] : null;
 				
 				foreach($socialMedia as $socialMediaItem){
-					$socialMediaName = strtolower($socialMediaItem['Type']['Description']);
-
-					if(in_array($socialMediaName,$validSocialMedia)){
-						$this -> $socialMediaName = $socialMediaItem['URL'];
-					}
+					$socialMediaName = Str::slug($socialMediaItem['Type']['Description'],'');
+					
+					$this -> $socialMediaName = in_array($socialMediaName,$validSocialMedia) && $socialMediaItem['URL'] ? $socialMediaItem['URL'] : null;
 				};
 
 				$mediaId = isset($response['Settings']['MediaID']) ? $response['Settings']['MediaID'] : null;

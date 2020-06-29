@@ -1,18 +1,57 @@
 //widget
 .widget {
+  position:relative;
   padding: 35px;
   margin-bottom: 30px;
   background-color: white;
   box-shadow: $shadow;
+
+  i.fa-caret-down, i.fa-caret-up {
+    display:none;
+    position:absolute;
+    top:35px;
+    font-size:26px;
+    cursor:pointer;
+  }
+
+  i.fa-caret-down {
+    right:40px;
+  }
+
+  i.fa-caret-up {
+    right:65px;
+  }
+
+  &.has-arrows {
+    i.fa-caret-down, i.fa-caret-up {
+      display:block;
+    }
+
+    &[data-position="0"] {
+      i.fa-caret-up {
+        
+      }
+    }
+  }
+
   @media only screen and (max-width: 992px) {
     padding: 35px 25px;
   }
   .feed-container {
+    display:inline-block;
     width:100%;
-    overflow:auto;
+    overflow:hidden;
+
+    .feed {
+      width:100%;
+      @include transition(0.35s);
+    }
 
     article {
       display:none;
+      padding:0;
+      width:100%;
+      float:left;
 
       &:nth-child(1), &:nth-child(2), &:nth-child(3) {
         display:block;
@@ -20,8 +59,6 @@
     }
 
     &.scroll {
-      overflow:auto;
-
       article {
         display:block;
       }
