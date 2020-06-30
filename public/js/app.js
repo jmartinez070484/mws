@@ -241,7 +241,7 @@ if(feed){
 			}
 
 			if(!feed.initComplete){
-				if(totalFeedItems > 3){
+				if(totalFeedItems > 5){
 					var arrows = feed.parentNode.querySelectorAll('i.fa-caret-down, i.fa-caret-up');
 					var totalArrows = arrows.length;
 

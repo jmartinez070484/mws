@@ -7370,7 +7370,9 @@ address p {
 
 .widget .feed-container article:nth-child(1),
 .widget .feed-container article:nth-child(2),
-.widget .feed-container article:nth-child(3) {
+.widget .feed-container article:nth-child(3),
+.widget .feed-container article:nth-child(4),
+.widget .feed-container article:nth-child(5) {
   display: block;
 }
 
