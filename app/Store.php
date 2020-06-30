@@ -169,11 +169,17 @@ class Store extends Model
 				$this -> fb_pixel = isset($response['Settings']['FBPixel']) ? isset($response['Settings']['FBPixel']) : null;
 				$this -> customer = $response['Customer'] ? json_encode($response['Customer']) : null;
 				$this -> story = isset($response['Settings']['Story']) ? $response['Settings']['Story'] : null;
+
+				foreach($validSocialMedia as $socialMediaKey){
+					$this -> $socialMediaKey = null;
+				}
 				
 				foreach($socialMedia as $socialMediaItem){
 					$socialMediaName = Str::slug($socialMediaItem['Type']['Description'],'');
 					
-					$this -> $socialMediaName = in_array($socialMediaName,$validSocialMedia) && $socialMediaItem['URL'] ? $socialMediaItem['URL'] : null;
+					if(in_array($socialMediaName,$validSocialMedia) && $socialMediaItem['URL']){
+						$this -> $socialMediaName = $socialMediaItem['URL'];
+					}
 				};
 
 				$mediaId = isset($response['Settings']['MediaID']) ? $response['Settings']['MediaID'] : null;
@@ -183,11 +189,8 @@ class Store extends Model
 
 					if($httpRequest -> ok()){
 						$response = $httpRequest -> json();
-						$mediaUrl = isset($response['URL']) ? $response['URL'] : null;
-						
-						if($mediaUrl){
-							$this -> media = $mediaUrl;
-						}
+
+						$this -> media = isset($response['URL']) ? $response['URL'] : null;
 					}
 				}
 
