@@ -1,18 +1,5 @@
 var modal = document.querySelector('.modal');
 var params = window.location.search;
-var sIdCookie = getCookie('sid');
-var sIdCookieDate = parseInt(getCookie('sDate'));
-
-if(sIdCookie && sIdCookieDate){
-	var currentDate = new Date().getTime();
-	var difference = ((currentDate - sIdCookieDate) / 1000) / 60;
-	var minutes = Math.abs(Math.round(difference));;
-	
-	if(minutes >= 20){
-		document.cookie = "sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-	    document.cookie = "sDate=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-	}
-}
 
 if(params){
 	var urlParams = params.substring(1);
@@ -22,11 +9,6 @@ if(params){
 	if(totalParams){
 		for(var x=0;x<totalParams;x++){
 			var singleParam = paramSplit[x].split('=');
-
-			if(singleParam[0] === 'sid' || singleParam[0] === 'sourceId'){
-				setCookie('sDate',new Date().getTime(),365);
-				setCookie('sid',singleParam[1],365);
-			}
 
 			if(singleParam[0] === 'promoCode'){
 				setCookie('promoCode',singleParam[1],365);
@@ -502,7 +484,6 @@ function addToCart(_element){
 function redirectToCart(_params = null){
 	var cartPrefix = 'https://cart.trivita.com';
 	var cartItems = getCookie('cartItems');
-	var sId = getCookie('sid');
 	var itbdoId = getCookie('itbdo');
 	var promoCode = getCookie('promoCode');
 	
@@ -512,7 +493,7 @@ function redirectToCart(_params = null){
     var expires = " expires=" + date.toGMTString() + ';';
 
     //redirect url
-    var url = sId ? cartPrefix + '/?dsCart=false&prodList='+cartItems+'&siteId=4&countryId='+countryId+'&sourceId='+sId : cartPrefix + '/?dsCart=false&prodList='+cartItems+'&siteId=4&countryId=1&sourceId=0';
+    var url = sId ? cartPrefix + '/?dsCart=false&prodList='+cartItems+'&siteId=7&countryId=1&sourceId='+sId : cartPrefix + '/?dsCart=false&prodList='+cartItems+'&siteId=7&countryId=1&sourceId=0';
 
     if(itbdoId){
     	url += '&tref=' + itbdoId;

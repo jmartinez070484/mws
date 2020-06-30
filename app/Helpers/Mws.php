@@ -40,7 +40,7 @@ class Mws {
 			if(!$mwsDefault){
 				$store -> apiUpdate();
 			}
-		}
+		}	
 		
 		$this -> default = $mwsDefault;
 		$this -> store = $store -> id ? $store : null;
