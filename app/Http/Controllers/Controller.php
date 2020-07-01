@@ -216,7 +216,7 @@ class Controller extends BaseController
         if(!$validator -> fails()){
         	$response['success'] = true;
 
-        	$response['mail'] = Mail::to('joe070484@gmail.com') -> send(new ContactMail($postData));
+        	$response['mail'] = Mail::to('jmartinez070484@gmail.com') -> send(new ContactMail($postData));
         }else{
         	$response['error'] = $validator -> errors() ->first();
         }
