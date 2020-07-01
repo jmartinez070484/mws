@@ -74,7 +74,6 @@ class Controller extends BaseController
 	public function catalog(){
 		$mws = Mws::instance();
 		$store = $mws -> store;
-		$categories = Category::all();
 
 		try{
 			$productList = $store -> products ? json_decode($store -> products -> content) : [];
@@ -83,6 +82,7 @@ class Controller extends BaseController
 		}
 		
 		$products = [];
+		$categoryIds = [];
 		
 		foreach($productList as $productItem){
 			$product = Product::where('product_id',$productItem -> Product -> ID) -> first();
@@ -90,9 +90,14 @@ class Controller extends BaseController
 			if($product){
 				$product -> category = $productItem -> Category -> ID;
 				array_push($products,$product);
+
+				if(!in_array($productItem -> Category -> ID,$categoryIds)){
+					array_push($categoryIds,$productItem -> Category -> ID);
+				}
 			}
 		}
 
+		$categories = Category::findMany($categoryIds);
 		$title = 'Products';
 		
 		return view('catalog',compact('mws','title','store','categories','products'));

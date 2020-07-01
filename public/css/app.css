@@ -6404,7 +6404,11 @@ address p {
 }
 
 .custom-filter .filter-menu {
-  margin-bottom: 50px;
+  margin-bottom: 25px;
+}
+
+.custom-filter .item-menu {
+  margin: 0 0 25px 0;
 }
 
 .custom-filter .item-menu button {
