@@ -16,7 +16,7 @@
 				<div class="col-lg-6 col-md-12">
 					<h3 class="like-h2">Customer Service</h3>
 
-					<p><a class="contact-link bold" href="tel:1-877-850-2968">123-456-7890</a></p>
+					<p><a class="contact-link bold" href="tel:1-877-850-2968">1.877.850.2968</a></p>
 					<p><a class="contact-link bold" href="mailto:memberservice@trivita.com">memberservice@trivita.com</a></p>
 
 					<time>
@@ -41,8 +41,9 @@
 					<p class="bold">John Sample</p>
 					<p><a class="contact-link bold" href="tel:1-480-555-1212">1.480.555.1212</a></p>
 
-					<a href="#" class="btn contact-btn">Send  a Message</a>
-
+					@if($store -> email)
+					<a href="#" class="btn contact-btn">Send a Message</a>
+					@endif
 				</div>
 			</div>
 		</section>

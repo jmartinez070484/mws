@@ -165,6 +165,8 @@ class Store extends Model
 				$this -> domain = $response['Settings']['Domain'];
 				$this -> site = $response['Settings']['SiteAddress'];
 				$this -> name = $response['Settings']['Title'];
+				$this -> phone = isset($response['Settings']['Phone']) ? $response['Settings']['Phone'] : null;
+				$this -> email = isset($response['Settings']['Email']) ? $response['Settings']['Email'] : null;
 				$this -> color = $response['Settings']['Color'];
 				$this -> fb_pixel = isset($response['Settings']['FBPixel']) ? isset($response['Settings']['FBPixel']) : null;
 				$this -> customer = $response['Customer'] ? json_encode($response['Customer']) : null;

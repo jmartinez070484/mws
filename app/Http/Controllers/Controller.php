@@ -202,6 +202,7 @@ class Controller extends BaseController
 
     */
 	public function contact(Request $request){
+
 		$postData = $request->all();
 		$response = ['success'=>false];
 
@@ -214,9 +215,15 @@ class Controller extends BaseController
         ]);
 
         if(!$validator -> fails()){
-        	$response['success'] = true;
+        	$mws = Mws::instance();
+			$store = $mws -> store;
 
-        	$response['mail'] = Mail::to('jmartinez070484@gmail.com') -> send(new ContactMail($postData));
+			if($store -> email){
+				$response['success'] = true;
+        		$response['mail'] = Mail::to($store -> email) -> subject($postData['subject']) -> send(new ContactMail($postData));
+			}else{
+				$response['error'] = 'Store does not have an email address!';
+			}
         }else{
         	$response['error'] = $validator -> errors() ->first();
         }
