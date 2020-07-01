@@ -25,7 +25,7 @@
 				<div class="article-footer">
 					<a href="{{ $mws -> default ? route('mws_blog',['site'=>$store -> site]) : route('blog') }}" class="back-btn">Back to Blog</a>
 
-					<div class="share-nav">
+					<!--div class="share-nav">
 						<p class="label-share">Share This</p>
 						<ul>
 							<li class="share-fb">
@@ -38,7 +38,7 @@
 								<a href="#"></a>
 							</li>
 						</ul>
-					</div>
+					</div-->
 				</div>
 
 			</article>

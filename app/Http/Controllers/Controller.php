@@ -8,9 +8,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
 use App\Helpers\Mws;
 use App\Product;
 use App\Category;
@@ -213,6 +215,8 @@ class Controller extends BaseController
 
         if(!$validator -> fails()){
         	$response['success'] = true;
+
+        	$response['mail'] = Mail::to('joe070484@gmail.com') -> send(new ContactMail($postData));
         }else{
         	$response['error'] = $validator -> errors() ->first();
         }

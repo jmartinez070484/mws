@@ -108,17 +108,6 @@
 						</div>
 					</div>
 					@endif
-					<!--div class="acc-card">
-						<div class="acc-title">Review</div>
-						<div class="acc-panel">
-							<ul class="review-faq-list">
-								<li>
-									<p class="review-faq-text"></p>
-									<p class="review-faq-text-author">- John Dow</>
-								</li>
-							</ul>
-						</div>
-					</div-->
 					@if($product -> references)
 					<div class="acc-card">
 						<div class="acc-title">References</div>
