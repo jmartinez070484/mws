@@ -220,7 +220,7 @@ class Controller extends BaseController
 
 			if($store -> email){
 				$response['success'] = true;
-        		$response['mail'] = Mail::to($store -> email) -> subject($postData['subject']) -> send(new ContactMail($postData));
+        		$response['mail'] = Mail::to($store -> email) -> send(new ContactMail($postData));
 			}else{
 				$response['error'] = 'Store does not have an email address!';
 			}

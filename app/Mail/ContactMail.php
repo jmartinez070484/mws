@@ -25,7 +25,7 @@ class ContactMail extends Mailable
     {
         $this -> name = $data['name'];
         $this -> email = $data['email'];
-        $this -> subject = $data['subject'];
+        $this -> subject_text = $data['subject'];
         $this -> text = $data['message'];
     }
 
@@ -36,6 +36,6 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contact');
+        return $this->subject($this -> subject_text)->view('emails.contact');
     }
 }
