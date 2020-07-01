@@ -70,7 +70,7 @@ class Store extends Model
 					$post = new Post;
 					$post -> id = $postData['ID'];
 					$post -> created_at = $postData['CreateDate'];
-					$post -> type = isset($postData['WPBlogID']) ? 2 : 1;
+					$post -> type = isset($postData['WPBlogID']) && $postData['WPBlogID'] ? 2 : 1;
 					$post -> store_id = $this -> id;
 					$post -> name = isset($postData['Title']) ? $postData['Title'] : null;
 					$post -> content = $postData['Content'];
