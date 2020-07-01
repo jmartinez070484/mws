@@ -282,7 +282,13 @@ class Controller extends BaseController
 			$mws = Mws::instance();
 			$store = $mws -> store;
 
-			return view('content',compact('mws','element','store'));
+			try{
+				$customer = json_decode($store -> customer);
+			}catch(Exception $exception){
+				$customer = [];
+			}
+
+			return view('content',compact('mws','element','store','customer'));
 		}else{
 			abort(404);
 		}	

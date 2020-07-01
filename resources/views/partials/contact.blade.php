@@ -38,7 +38,9 @@
 				<div class="col-lg-6 col-md-12">
 					<h3 class="like-h2">Store Owner</h3>
 
-					<p class="bold">John Sample</p>
+					@if($customer)
+					<p class="bold">{{ $customer -> FirstName }} {{ $customer -> LastName }}</p>
+					@endif
 					@if($store -> phone)
 					<p><a class="contact-link bold" href="tel:{{ $store -> phone }}">{{ $store -> phone }}</a></p>
 					@endif
