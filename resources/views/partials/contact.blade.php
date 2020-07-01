@@ -39,7 +39,9 @@
 					<h3 class="like-h2">Store Owner</h3>
 
 					<p class="bold">John Sample</p>
-					<p><a class="contact-link bold" href="tel:1-480-555-1212">1.480.555.1212</a></p>
+					@if($store -> phone)
+					<p><a class="contact-link bold" href="tel:{{ $store -> phone }}">{{ $store -> phone }}</a></p>
+					@endif
 
 					@if($store -> email)
 					<a href="#" class="btn contact-btn">Send a Message</a>
