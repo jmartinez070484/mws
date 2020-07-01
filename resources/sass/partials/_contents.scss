@@ -181,10 +181,10 @@
   .custom-filter[data-category="0"] {
 
   }
-  .custom-filter[data-category="34"] {
+  .custom-filter[data-category="1"] {
     ul {
       li {
-        &[data-category="34"] button {
+        &[data-category="1"] button {
           color:#FFF;
           background:$accent;
         }
@@ -195,16 +195,16 @@
       .col-lg-4 {
         display:none;
  
-        &[data-category="34"] {
+        &[data-category="1"] {
           display:block;
         }
       }
     }
   }
-  .custom-filter[data-category="35"] {
+  .custom-filter[data-category="2"] {
     ul {
       li {
-        &[data-category="35"] button {
+        &[data-category="2"] button {
           color:#FFF;
           background:$accent;
         }
@@ -215,16 +215,16 @@
       .col-lg-4 {
         display:none;
 
-        &[data-category="35"] {
+        &[data-category="2"] {
           display:block;
         }
       }
     }
   }
-  .custom-filter[data-category="36"] {
+  .custom-filter[data-category="3"] {
     ul {
       li {
-        &[data-category="36"] button {
+        &[data-category="3"] button {
           color:#FFF;
           background:$accent;
         }
@@ -235,16 +235,16 @@
       .col-lg-4 {
         display:none;
 
-        &[data-category="36"] {
+        &[data-category="3"] {
           display:block;
         }
       }
     }
   }
-  .custom-filter[data-category="37"] {
+  .custom-filter[data-category="4"] {
     ul {
       li {
-        &[data-category="37"] button {
+        &[data-category="4"] button {
           color:#FFF;
           background:$accent;
         }
@@ -255,7 +255,47 @@
       .col-lg-4 {
         display:none;
 
-        &[data-category="37"] {
+        &[data-category="4"] {
+          display:block;
+        }
+      }
+    }
+  }
+  .custom-filter[data-category="5"] {
+    ul {
+      li {
+        &[data-category="5"] button {
+          color:#FFF;
+          background:$accent;
+        }
+      }
+    }
+
+    + .product-list {
+      .col-lg-4 {
+        display:none;
+
+        &[data-category="5"] {
+          display:block;
+        }
+      }
+    }
+  }
+  .custom-filter[data-category="6"] {
+    ul {
+      li {
+        &[data-category="6"] button {
+          color:#FFF;
+          background:$accent;
+        }
+      }
+    }
+
+    + .product-list {
+      .col-lg-4 {
+        display:none;
+
+        &[data-category="6"] {
           display:block;
         }
       }
