@@ -18,7 +18,7 @@
 				<li>Regenerative Medicine</li>
 				<li>Telemedicine</li>
 			</ul>
-			<a href="#" class="btn">View Site</a>
+			<a href="https://www.trivitaclinic.com" class="btn">View Site</a>
 		</section>
 		
 		<x-sidebar/>

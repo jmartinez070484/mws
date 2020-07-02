@@ -7,7 +7,7 @@
 		<p>
 			<a href="#">Home</a>
 			<a href="#">Products</a>
-			<span class="current">{{ $product -> name }}</span>
+			<span class="current">{!! $product -> name !!}</span>
 		</p>
 	</div>
 </div>
@@ -23,7 +23,7 @@
 					<div class="block-text">
 						<form action="#" onsubmit="return false">
 							<div class="title-block">
-								<p class="name">{{ $product -> name }}</p>
+								<p class="name">{!! $product -> name !!}</p>
 								<p class="price">${{ $product -> net_price ? $product -> net_price : $product -> retail_price }}</p>
 							</div>
 							<div class="quantity-block">
