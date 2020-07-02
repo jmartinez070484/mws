@@ -24,7 +24,7 @@
 
 <header class="header">
 
-	<a href="{{ $store -> domain ? $store -> domain : '/'.$store -> site }}" class="logo">
+	<a href="{{ $store -> domain ? 'http://'.$store -> domain : '/'.$store -> site }}" class="logo">
 		<div class="wrap-logo">
 			<img src="{{ asset('/assets/main-logo.png') }}" alt="logo My Wellness Store">
 		</div>
