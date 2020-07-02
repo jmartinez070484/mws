@@ -35,7 +35,7 @@
 									<img src="https://cdn.trivita.com/US/EN/images/products/{{ $product -> product_id }}-lrg.png" alt="{{ $product -> name }}" />
 								</div>
 								<div class="block-text">
-									<h3 class="product-name border-under">{{ $product -> name }}</h3>
+									<h3 class="product-name border-under">{!! $product -> name !!}</h3>
 									<p>{{ $product -> claim }}</p>
 								</div>
 							</a>
