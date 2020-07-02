@@ -54,7 +54,7 @@
 			</div>
 			<div class="col-lg-7 col-md-12">
 				<div class="product-info">
-					<h1 class="product-title">{{ $product -> name }}</h1>
+					<h1 class="product-title">{!! $product -> name !!}</h1>
 					<div class="stars-block big four border-under d-flex align-items-center" data-score="{{ $product -> review_score }}">
 						<ul>
 							<li></li>
