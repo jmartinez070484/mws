@@ -22,6 +22,7 @@ class Mws {
 	function __construct(Request $request){
 		$domain = $request -> getHttpHost();
 		$mwsDefault = $domain === env('APP_DEFAULT_DOMAIN') ? true : false;
+		$site = null;
 
 		if($mwsDefault && !$request -> is('/')){
 			$path = explode('/',$request -> path());
@@ -40,8 +41,6 @@ class Mws {
 			if($site){
 				$store -> site = $site;
 			}
-
-			$store -> save();
 			
 			if(!$mwsDefault){
 				$store -> apiUpdate();
