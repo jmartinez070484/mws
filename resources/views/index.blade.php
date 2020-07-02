@@ -46,7 +46,7 @@
 				</div>
 
 				<div class="wrap-btn text-center">
-					<a href="{{ $mws -> default ? route('mws_catalog',['site'=>$store -> id]) : route('catalog') }}" class="btn">Show more</a>
+					<a href="{{ $mws -> default ? route('mws_catalog',['site'=>$store -> site]) : route('catalog') }}" class="btn">Show more</a>
 				</div>
 			</div>
 			
