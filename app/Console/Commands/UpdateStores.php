@@ -45,16 +45,24 @@ class UpdateStores extends Command
         
         if($httpRequest -> ok()){
             $stores = $httpRequest -> json();
-
+            
             foreach($stores as $storeData){
                 $domain = isset($storeData['Settings']['Domain']) ? $storeData['Settings']['Domain'] : null;
+                $site = isset($storeData['Settings']['SiteAddress']) ? $storeData['Settings']['SiteAddress'] : null;
 
-                if($domain){
-                    $store = Store::where('domain',$domain) -> first();
+                if($domain || $site){
+                    $store = $domain ? Store::where('domain',$domain) -> first() : Store::where('site',$site) -> first();
                     
                     if(!$store){
                         $store = new Store;
-                        $store -> domain = $domain;
+
+                        if($domain){
+                            $store -> domain = $domain;
+                        }
+
+                        if($site){
+                            $store -> site = $site;
+                        }
                     }
 
                     $store -> apiUpdate();

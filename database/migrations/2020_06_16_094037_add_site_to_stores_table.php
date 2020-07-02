@@ -14,7 +14,7 @@ class AddSiteToStoresTable extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->string('site');
+            $table->string('site')->nullable()->after('domain');
         });
     }
 

@@ -19,7 +19,7 @@ class CreateStoresTable extends Migration
             $table->integer('active')->default(1);
             $table->integer('source_id');
             $table->boolean('specials')->default(1);
-            $table->string('domain')->unique();
+            $table->string('domain')->nullable();
             $table->string('name');
             $table->string('color')->nullable();
             $table->string('fb_pixel')->nullable();

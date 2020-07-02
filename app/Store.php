@@ -150,8 +150,12 @@ class Store extends Model
 
     */
     public function apiUpdate(){
-    	if($this -> domain){
-    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/Search/?domainOrAddress='.$this -> domain);
+    	if($this -> domain || $this -> site || $this -> id){
+    		if($this -> id){
+    			$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id);
+    		}else{
+    			$httpRequest = $this -> domain ? Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/Search/?domainOrAddress='.$this -> domain) : Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/Search/?domainOrAddress='.$this -> site);
+    		}
     		
 			if($httpRequest -> ok()){
 				$response = $httpRequest -> json();
@@ -162,8 +166,8 @@ class Store extends Model
 				$this -> active = $response['Active'];
 				$this -> source_id = $response['SourceID'];
 				$this -> specials = isset($response['Settings']['DisplaySpecials']) ? $response['Settings']['DisplaySpecials'] : 0;
-				$this -> domain = $response['Settings']['Domain'];
-				$this -> site = $response['Settings']['SiteAddress'];
+				$this -> domain = isset($response['Settings']['Domain']) ? $response['Settings']['Domain'] : null;
+				$this -> site = isset($response['Settings']['SiteAddress']) ? $response['Settings']['SiteAddress'] : null;
 				$this -> name = $response['Settings']['Title'];
 				$this -> phone = isset($response['Settings']['Phone']) ? $response['Settings']['Phone'] : null;
 				$this -> email = isset($response['Settings']['Email']) ? $response['Settings']['Email'] : null;

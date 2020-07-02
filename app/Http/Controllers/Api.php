@@ -64,27 +64,21 @@ class Api extends Controller
 
     /*
 
-        Stores
-
-    */
-    public function stores(Request $request){
-        $response = ['success'=>true];  
-
-        $exitCode = Artisan::call('stores:update',[
-            '--queue'=>'default'
-        ]);
-
-        return response($response);
-    }
-
-    /*
-
         Store
 
     */
-    public function store(Request $request,Store $store){
+    public function store(Request $request,$store){
+        $id = $store;
+        $store = Store::where('id',$id) -> first();
+        
+        if(!$store){
+            $store = new Store;
+            $store -> id = $id;
+        }
+
         $store -> apiUpdate();
-        $response = ['success'=>true,'store'=>$store];  
+
+        $response = $store -> id ? ['success'=>true,'store'=>$store] : ['success'=>false,'store'=>$store];  
 
         return response($response);
     }

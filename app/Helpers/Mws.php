@@ -25,17 +25,23 @@ class Mws {
 
 		if($mwsDefault && !$request -> is('/')){
 			$path = explode('/',$request -> path());
-			
-			if(count($path) > 0){
-				$domain = $path[0];
-			}
+			$site = count($path) > 0 ? $path[0] : null;
 		}
 
-		$store = $mwsDefault ? Store::where('site',$domain) -> first() : Store::where('domain',$domain) -> first();
+		$store = $mwsDefault ? Store::where('site',$site) -> first() : Store::where('domain',$domain) -> first();
 		
 		if(!$store){
 			$store = new Store;
-			$store -> domain = $domain;
+
+			if($domain){
+				$store -> domain = $domain;
+			}
+
+			if($site){
+				$store -> site = $site;
+			}
+
+			$store -> save();
 			
 			if(!$mwsDefault){
 				$store -> apiUpdate();
