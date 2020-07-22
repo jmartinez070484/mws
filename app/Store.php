@@ -197,7 +197,11 @@ class Store extends Model
 						$response = $httpRequest -> json();
 
 						$this -> media = isset($response['URL']) ? $response['URL'] : null;
+					}else{
+						$this -> media = null;
 					}
+				}else{
+					$this -> media = null;
 				}
 
 				$this -> save();
