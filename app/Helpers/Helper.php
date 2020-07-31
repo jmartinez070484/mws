@@ -6,6 +6,27 @@ class Helper {
 
     /*
 
+        Feed Media Type
+
+    */
+    static function feedMediaType($mediaFile){
+        $pathInfo = pathinfo($mediaFile);
+        $extension = $pathInfo['extension'] ? $pathInfo['extension'] : null;
+        $imageExtensions = ['png','jpg','jpeg'];
+        $videoExtensions = ['mp4','mov','avi'];
+        $media = '';
+        
+        if(in_array($extension,$imageExtensions)){
+            $media = '<img src="'.$mediaFile.'" alt="" />';
+        }else if(in_array($extension,$videoExtensions)){
+            $media = '<video controls><source src="'.$mediaFile.'" type="video/'.$extension.'"></video>';
+        }
+
+        return $media;
+    }
+
+    /*
+
         Excerpt
 
     */

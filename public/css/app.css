@@ -7388,6 +7388,12 @@ address p {
   padding-top: 20px;
 }
 
+.widget article.border-above video {
+  display: block;
+  width: 100%;
+  height: 220px;
+}
+
 .widget .widget-image {
   width: 100%;
   height: auto;

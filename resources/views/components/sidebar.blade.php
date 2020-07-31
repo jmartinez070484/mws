@@ -12,7 +12,7 @@
                     @endif
                     <p class="content">{{ $article -> content }}</p>
                     @if(isset($article -> image))
-                    <img class="widget-image" src="{{ $article -> image }}" alt="">
+                        {!! Helper::feedMediaType($article -> image) !!}
                     @endif
                 </article>
                 @endforeach
