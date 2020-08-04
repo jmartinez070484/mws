@@ -501,7 +501,7 @@
 }
 
 ////////////////////////single-blog-page
-.single-blog-page {
+.single-blog-page, .post {
   .article-wrapper {
     margin-bottom: 50px;
     .article-title {
@@ -511,6 +511,26 @@
       margin-bottom: 20px;
       width: 100%;
       height: auto;
+    }
+    figure {
+      &.media {
+        position:relative;
+        width:100%;
+        padding:56% 0 0 0;
+        margin:20px 0 20px 0;
+
+        iframe {
+          position:absolute;
+          top:0;
+          left:0;
+          right:0;
+          bottom:0;
+          height:100%;
+          width:100%;
+          border:none;
+          outline:none;
+        }
+      }
     }
   }
 }

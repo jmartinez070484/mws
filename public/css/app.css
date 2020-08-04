@@ -7962,18 +7962,42 @@ address p {
   }
 }
 
-.single-blog-page .article-wrapper {
+.single-blog-page .article-wrapper,
+.post .article-wrapper {
   margin-bottom: 50px;
 }
 
-.single-blog-page .article-wrapper .article-title {
+.single-blog-page .article-wrapper .article-title,
+.post .article-wrapper .article-title {
   font-size: 36px;
 }
 
-.single-blog-page .article-wrapper .article-image {
+.single-blog-page .article-wrapper .article-image,
+.post .article-wrapper .article-image {
   margin-bottom: 20px;
   width: 100%;
   height: auto;
+}
+
+.single-blog-page .article-wrapper figure.media,
+.post .article-wrapper figure.media {
+  position: relative;
+  width: 100%;
+  padding: 56% 0 0 0;
+  margin: 20px 0 20px 0;
+}
+
+.single-blog-page .article-wrapper figure.media iframe,
+.post .article-wrapper figure.media iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
 }
 
 .article-footer {

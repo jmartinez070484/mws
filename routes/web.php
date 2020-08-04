@@ -20,7 +20,6 @@ Route::get('/clinic','Controller@content') -> name('clinic');
 Route::get('/policy','Controller@content') -> name('policy');
 Route::get('/terms','Controller@content') -> name('terms');
 Route::get('/contact','Controller@content') -> name('contact');
-Route::post('/contact','Controller@contact') -> name('contact');
 Route::get('/giving-back','Controller@content') -> name('giving');
 
 //mws domain
@@ -33,4 +32,5 @@ Route::get('/{site}/clinic','Controller@content') -> name('mws_clinic');
 Route::get('/{site}/policy','Controller@content') -> name('mws_policy');
 Route::get('/{site}/terms','Controller@content') -> name('mws_terms');
 Route::get('/{site}/contact','Controller@content') -> name('mws_contact');
+Route::post('/{site}/contact','Controller@contact');
 Route::get('/{site}/giving-back','Controller@content') -> name('mws_giving');
