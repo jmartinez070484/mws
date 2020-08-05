@@ -13,6 +13,8 @@
 				<h2 class="header-section text-center">My Wellness Story</h2>
 				{!! $store -> story !!}
 			</div>
+
+			<x-sidebar/>
 		</div>
 	</div>
 </section>
@@ -50,7 +52,7 @@
 				</div>
 			</div>
 			
-			<x-sidebar/>
+			
 		</div>
 	</div>
 </section>
