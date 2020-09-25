@@ -21,6 +21,7 @@ Route::get('/policy','Controller@content') -> name('policy');
 Route::get('/terms','Controller@content') -> name('terms');
 Route::get('/contact','Controller@content') -> name('contact');
 Route::get('/giving-back','Controller@content') -> name('giving');
+Route::get('/immune-health-dvd-6009','Controller@content') -> name('immune');
 
 //mws domain
 Route::get('/{site}','Controller@index') -> name('mws_index');
@@ -34,3 +35,4 @@ Route::get('/{site}/terms','Controller@content') -> name('mws_terms');
 Route::get('/{site}/contact','Controller@content') -> name('mws_contact');
 Route::post('/{site}/contact','Controller@contact');
 Route::get('/{site}/giving-back','Controller@content') -> name('mws_giving');
+Route::get('/{site}/immune-health-dvd-6009','Controller@content') -> name('mws_immune');
