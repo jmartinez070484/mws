@@ -21,7 +21,9 @@ var mobileMenu = document.querySelector('.burger');
 
 if(mobileMenu){
 	mobileMenu.addEventListener('click',function(){
-		this.previousElementSibling.className = this.previousElementSibling.className.indexOf('active') === -1 ? this.previousElementSibling.className + ' active' : this.previousElementSibling.className.replace(' active','');
+		var menu = this.previousElementSibling;
+
+		menu.className = menu.className.indexOf('active') === -1 ? menu.className + ' active' : menu.className.replace(' active','');
 	});
 }
 
