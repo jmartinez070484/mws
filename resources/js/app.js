@@ -17,7 +17,7 @@ if(params){
 	}
 }
 
-var mobileMenu = document,querySelector('.burger');
+var mobileMenu = document.querySelector('.burger');
 
 if(mobileMenu){
 	mobileMenu.addEventListener('click',function(){
