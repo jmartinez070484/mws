@@ -17,6 +17,14 @@ if(params){
 	}
 }
 
+var mobileMenu = document,querySelector('.burger');
+
+if(mobileMenu){
+	mobileMenu.addEventListener('click',function(){
+		this.previousElementSibling.className = this.previousElementSibling.className.indexOf('active') === -1 ? this.previousElementSibling.className + ' active' : this.previousElementSibling.className.replace(' active','');
+	});
+}
+
 var categories = document.querySelectorAll('.custom-filter ul li button');
 var totalCategories = categories.length;
 
