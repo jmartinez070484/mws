@@ -13,6 +13,25 @@ if(params){
 			if(singleParam[0] === 'promoCode'){
 				setCookie('promoCode',singleParam[1],365);
 			}
+
+			if(singleParam[0] === 'sid'){
+				setCookie('sid',singleParam[1],365);
+			}
+		}
+	}
+}
+
+var sidLinks = document.querySelectorAll('a.sid');
+var totalSidLinks = sidLinks.length;
+
+if(totalSidLinks){
+	var sidCookie = getCookie('sid');
+
+	if(sidCookie){
+		for(var x=0;x<totalSidLinks;x++){
+			var linkUrl = sidLinks[x].getAttribute('href');
+
+			sidLinks[x].setAttribute('href',linkUrl + '?sid=' + sidCookie);
 		}
 	}
 }

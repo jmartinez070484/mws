@@ -13,15 +13,36 @@ if(params){
 			if(singleParam[0] === 'promoCode'){
 				setCookie('promoCode',singleParam[1],365);
 			}
+
+			if(singleParam[0] === 'sid'){
+				setCookie('sid',singleParam[1],365);
+			}
 		}
 	}
 }
 
-var mobileMenu = document,querySelector('.burger');
+var sidLinks = document.querySelectorAll('a.sid');
+var totalSidLinks = sidLinks.length;
+
+if(totalSidLinks){
+	var sidCookie = getCookie('sid');
+
+	if(sidCookie){
+		for(var x=0;x<totalSidLinks;x++){
+			var linkUrl = sidLinks[x].getAttribute('href');
+
+			sidLinks[x].setAttribute('href',linkUrl + '?sid=' + sidCookie);
+		}
+	}
+}
+
+var mobileMenu = document.querySelector('.burger');
 
 if(mobileMenu){
 	mobileMenu.addEventListener('click',function(){
-		this.previousElementSibling.className = this.previousElementSibling.className.indexOf('active') === -1 ? this.previousElementSibling.className + ' active' : this.previousElementSibling.className.replace(' active','');
+		var menu = this.previousElementSibling;
+
+		menu.className = menu.className.indexOf('active') === -1 ? menu.className + ' active' : menu.className.replace(' active','');
 	});
 }
 

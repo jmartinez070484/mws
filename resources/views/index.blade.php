@@ -13,8 +13,20 @@
 				<h2 class="header-section text-center">My Wellness Story</h2>
 				{!! $store -> story !!}
 			</div>
-
 			<x-sidebar/>
+		</div>
+	</div>
+</section>
+
+<section class="callout-section">
+	<div class="container-md">
+		<div class="row">
+			<div class="col-lg-8 col-md-12">
+				<div>
+					<h3>Know your risk of chronic inflammation.</h3>
+					<p><img src="/assets/trivita-inflammation.png" alt="Chronic inflammation" /><span>TriVita Clinic’s</span> FREE<br />Inflammation Health<br />Awareness Assessment<br /><a class="sid" href="https://ihaa.trivitaclinic.com">Get your results now!</a></p>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
