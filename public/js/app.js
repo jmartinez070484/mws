@@ -31,7 +31,7 @@ if(totalSidLinks){
 		for(var x=0;x<totalSidLinks;x++){
 			var linkUrl = sidLinks[x].getAttribute('href');
 
-			sidLinks[x].setAttribute('href',linkUrl + '?sid=' + sidCookie);
+			//sidLinks[x].setAttribute('href',linkUrl + '?sid=' + sidCookie);
 		}
 	}
 }
