@@ -108,7 +108,7 @@ if(productSelect){
 			var productImg = document.querySelector('.product-actions .image-container img');
 			var titleBlock = document.querySelector('.title-block');
 			var qtyBlock = document.querySelector('.quantity-block');
-			var selectBtn = document.querySelector('.product-actions input[type="button"]');
+			var selectBtn = document.querySelector('.product-actions input[value="Add to cart"]');
 			
 			productImg.setAttribute('src','https://cdn.trivita.com/US/EN/images/products/' + selectedProduct['product_id'] + '-lrg.png');
 			titleBlock.children[0].innerText = selectedProduct['name'];
@@ -118,12 +118,10 @@ if(productSelect){
 			
 			if(selectedProduct.stock){
 				selectBtn.removeAttribute('disabled');
-				selectBtn.removeAttribute('onclick');
 			}else{
 				selectBtn.setAttribute('disabled',true);
-				selectBtn.setAttribute('onclick','addToCart(this,true,true)');
 			}
-			console.log(selectBtn);
+	
 			selectBtn.setAttribute('data-id',selectedProduct.product_id);
 			selectBtn.setAttribute('data-product',selectedProduct.name);
 			selectBtn.setAttribute('data-price',selectedProduct.net_price ? selectedProduct.net_price : selectedProduct.retail_price);
