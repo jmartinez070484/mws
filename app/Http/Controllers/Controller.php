@@ -37,7 +37,7 @@ class Controller extends BaseController
 		Index
 
     */
-	public function index(){
+	public function index(Request $request){
 		$mws = Mws::instance();
 		$store = $mws -> store;
 		
@@ -60,6 +60,11 @@ class Controller extends BaseController
 						break;
 					}
 				}
+			}
+
+			if($request -> has('update')){
+				$store -> apiUpdate();
+				$store -> apiFeedUpdate();
 			}
 
 			return view('index',compact('mws','store','products'));
@@ -292,5 +297,17 @@ class Controller extends BaseController
 		}else{
 			abort(404);
 		}	
+	}
+
+	/*
+
+		Offer
+
+    */
+	public function offer(Request $request){
+		$mws = Mws::instance();
+		$store = $mws -> store;
+		
+		return view('offer',compact('mws','store'));	
 	}
 }

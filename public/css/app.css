@@ -7455,6 +7455,11 @@ address p {
   }
 }
 
+.content-section {
+  padding: 50px 0;
+  text-align: center;
+}
+
 .widget p.content {
   display: none;
 }
@@ -7934,10 +7939,33 @@ address p {
 }
 
 .product-card .detail-block {
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.product-card .detail-block ul {
+  margin: 0 0 15px 0;
+  padding: 0 0 0 20px;
+  width: 100%;
+}
+
+.product-card .detail-block ul li {
+  position: relative;
+  width: 100%;
+}
+
+.product-card .detail-block ul li:before {
+  position: absolute;
+  top: 8px;
+  left: -16px;
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 3px 3px;
+  content: "";
 }
 
 .product-card .detail-block .price {

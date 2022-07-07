@@ -29,7 +29,7 @@ class Mws {
 			$site = count($path) > 0 ? $path[0] : null;
 		}
 
-		$store = $mwsDefault ? Store::where('site',$site) -> first() : Store::where('domain',$domain) -> first();
+		$store = $mwsDefault ? Store::where('site',$site) -> first() : Store::where('domain','LIKE','%'.$domain.'%') -> first();
 		
 		if(!$store){
 			$store = new Store;

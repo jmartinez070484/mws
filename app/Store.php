@@ -58,7 +58,7 @@ class Store extends Model
 
     */
     private function postsUpdateLoops($page){
-    	$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Blog/0/50/'.$page);
+    	$httpRequest = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Blog/0/50/'.$page);
 
 		if($httpRequest -> ok()){
 			$response = $httpRequest -> json();
@@ -95,7 +95,7 @@ class Store extends Model
     */
     public function apiProductListUpdate(){
     	if($this -> id){
-    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Product');
+    		$httpRequest = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Product');
 
 			if($httpRequest -> ok()){
 				$response = $httpRequest -> json();
@@ -122,7 +122,7 @@ class Store extends Model
     */
     public function apiFeedUpdate(){
     	if($this -> id){
-    		$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Feed/0/50/1');
+    		$httpRequest = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id.'/Article/Feed/0/50/1');
 
 			if($httpRequest -> ok()){
 				$response = $httpRequest -> json();
@@ -152,61 +152,63 @@ class Store extends Model
     public function apiUpdate(){
     	if($this -> domain || $this -> site || $this -> id){
     		if($this -> id){
-    			$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id);
+    			$httpRequest = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Store/'.$this -> id);
     		}else{
-    			$httpRequest = $this -> domain ? Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/Search/?domainOrAddress='.$this -> domain) : Http::get(env('TRIVITA_WELLNESS_API').'/api/Store/Search/?domainOrAddress='.$this -> site);
+    			$httpRequest = $this -> domain ? Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Store/Search/?domainOrAddress='.$this -> domain) : Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Store/Search/?domainOrAddress='.$this -> site);
     		}
     		
 			if($httpRequest -> ok()){
 				$response = $httpRequest -> json();
-				$validSocialMedia = ['facebook','instagram','youtube','pinterest'];
-				$socialMedia = isset($response['Settings']['Social']) ? $response['Settings']['Social'] : null;
 				
-				$this -> id = $response['ID'];
-				$this -> active = $response['Active'];
-				$this -> source_id = $response['SourceID'];
-				$this -> specials = isset($response['Settings']['DisplaySpecials']) ? $response['Settings']['DisplaySpecials'] : 0;
-				$this -> domain = isset($response['Settings']['Domain']) ? $response['Settings']['Domain'] : null;
-				$this -> site = isset($response['Settings']['SiteAddress']) ? $response['Settings']['SiteAddress'] : null;
-				$this -> name = $response['Settings']['Title'];
-				$this -> phone = isset($response['Settings']['Phone']) ? $response['Settings']['Phone'] : null;
-				$this -> email = isset($response['Settings']['Email']) ? $response['Settings']['Email'] : null;
-				$this -> color = $response['Settings']['Color'];
-				$this -> fb_pixel = isset($response['Settings']['FBPixel']) ? isset($response['Settings']['FBPixel']) : null;
-				$this -> customer = $response['Customer'] ? json_encode($response['Customer']) : null;
-				$this -> story = isset($response['Settings']['Story']) ? $response['Settings']['Story'] : null;
+				if($response){
+					$validSocialMedia = ['facebook','instagram','youtube','pinterest'];
+					$socialMedia = isset($response['Settings']['Social']) ? $response['Settings']['Social'] : null;
 
-				foreach($validSocialMedia as $socialMediaKey){
-					$this -> $socialMediaKey = null;
-				}
-				
-				foreach($socialMedia as $socialMediaItem){
-					$socialMediaName = Str::slug($socialMediaItem['Type']['Description'],'');
-					
-					if(in_array($socialMediaName,$validSocialMedia) && $socialMediaItem['URL']){
-						$this -> $socialMediaName = $socialMediaItem['URL'];
+					$this -> id = $response['ID'];
+					$this -> active = $response['Active'];
+					$this -> source_id = $response['SourceID'];
+					$this -> specials = isset($response['Settings']['DisplaySpecials']) ? $response['Settings']['DisplaySpecials'] : 0;
+					$this -> domain = isset($response['Settings']['Domain']) ? $response['Settings']['Domain'] : null;
+					$this -> site = isset($response['Settings']['SiteAddress']) ? $response['Settings']['SiteAddress'] : null;
+					$this -> name = $response['Settings']['Title'];
+					$this -> phone = isset($response['Settings']['Phone']) ? $response['Settings']['Phone'] : null;
+					$this -> email = isset($response['Settings']['Email']) ? $response['Settings']['Email'] : null;
+					$this -> color = $response['Settings']['Color'];
+					$this -> fb_pixel = isset($response['Settings']['FBPixel']) ? isset($response['Settings']['FBPixel']) : null;
+					$this -> customer = $response['Customer'] ? json_encode($response['Customer']) : null;
+					$this -> story = isset($response['Settings']['Story']) ? $response['Settings']['Story'] : null;
+
+					foreach($validSocialMedia as $socialMediaKey){
+						$this -> $socialMediaKey = null;
 					}
-				};
+					
+					foreach($socialMedia as $socialMediaItem){
+						$socialMediaName = Str::slug($socialMediaItem['Type']['Description'],'');
+						
+						if(in_array($socialMediaName,$validSocialMedia) && $socialMediaItem['URL']){
+							$this -> $socialMediaName = $socialMediaItem['URL'];
+						}
+					};
 
-				$mediaId = isset($response['Settings']['MediaID']) ? $response['Settings']['MediaID'] : null;
-				
-				if($mediaId){
-					$httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Media/'.$mediaId);
+					$mediaId = isset($response['Settings']['MediaID']) ? $response['Settings']['MediaID'] : null;
+					
+					if($mediaId){
+						$httpRequest = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Media/'.$mediaId);
 
-					if($httpRequest -> ok()){
-						$response = $httpRequest -> json();
+						if($httpRequest -> ok()){
+							$response = $httpRequest -> json();
 
-						$this -> media = isset($response['URL']) ? $response['URL'] : null;
+							$this -> media = isset($response['URL']) ? $response['URL'] : null;
+						}else{
+							$this -> media = null;
+						}
 					}else{
 						$this -> media = null;
 					}
-				}else{
-					$this -> media = null;
+					
+					$this -> save();
 				}
-
-				$this -> save();
 			}
     	}
     }
-
 }

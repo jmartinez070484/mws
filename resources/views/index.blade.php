@@ -10,6 +10,7 @@
 	<div class="container-md">
 		<div class="row">
 			<div class="col-lg-8 col-md-12">
+				<x-dynamic-content/>
 				<h2 class="header-section text-center">My Wellness Story</h2>
 				{!! $store -> story !!}
 			</div>
@@ -24,7 +25,7 @@
 			<div class="col-lg-8 col-md-12">
 				<div>
 					<h3>Know your risk of chronic inflammation.</h3>
-					<p><img src="/assets/trivita-inflammation.png" alt="Chronic inflammation" /><span>TriVita Clinic’s</span> FREE<br />Inflammation Health<br />Awareness Assessment<br /><a class="sid" href="{{ $mws -> default ? route('mws_ihaa',['site'=>$store -> site]) : route('ihaa') }}">Find out more!</a></p>
+					<p><img src="/assets/trivita-inflammation.png" alt="Chronic inflammation" /><span>TriVita Clinic’s</span> FREE<br />Inflammation Health<br />Awareness Assessment<br /><a class="sid" href="{{ $mws -> default && $store -> site ? route('mws_ihaa',['site'=>$store -> site]) : route('ihaa') }}">Find out more!</a></p>
 				</div>
 			</div>
 		</div>

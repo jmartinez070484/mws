@@ -41,7 +41,7 @@ class UpdateProducts extends Command
      */
     public function handle()
     {
-        $httpRequestCategories = Http::get(env('TRIVITA_WELLNESS_API').'/api/Product');
+        $httpRequestCategories = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Product');
 
         if($httpRequestCategories -> ok()){
             $categories = $httpRequestCategories -> json();
@@ -64,7 +64,7 @@ class UpdateProducts extends Command
             $this->info('Categories Updated!');
         }
 
-        $httpRequestCatalog = Http::get(env('TRIVITA_API_CATALOG'));
+        $httpRequestCatalog = Http::accept('application/json') -> get(env('TRIVITA_API_CATALOG'));
 
         if($httpRequestCatalog -> ok()){
             $catalog = $httpRequestCatalog -> json();

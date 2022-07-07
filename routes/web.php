@@ -22,6 +22,7 @@ Route::get('/terms','Controller@content') -> name('terms');
 Route::get('/contact','Controller@content') -> name('contact');
 Route::get('/giving-back','Controller@content') -> name('giving');
 Route::get('/immune-health-dvd','Controller@content') -> name('immune');
+Route::get('/offer','Controller@offer') -> name('offer');
 Route::get('/ihaa','Controller@content') -> name('ihaa');
 
 //mws domain
@@ -37,4 +38,5 @@ Route::get('/{site}/contact','Controller@content') -> name('mws_contact');
 Route::post('/{site}/contact','Controller@contact');
 Route::get('/{site}/giving-back','Controller@content') -> name('mws_giving');
 Route::get('/{site}/immune-health-dvd','Controller@content') -> name('mws_immune');
+Route::get('/{site}/offer','Controller@offer') -> name('mws_offer');
 Route::get('/{site}/ihaa','Controller@content') -> name('mws_ihaa');

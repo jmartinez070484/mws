@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user','Api@user');
 Route::post('/stores','Api@stores');
-Route::post('/stores/{store}','Api@store') -> where('store','[0-9]+');
-Route::post('/stores/{store}/feed','Api@feed') -> where('store','[0-9]+');
-Route::post('/stores/{store}/products','Api@products') -> where('store','[0-9]+');
-Route::post('/stores/{store}/posts','Api@blog_post') -> where('store','[0-9]+');
-Route::post('/posts/{id}','Api@trivita_post') -> where('store','[0-9]+');
+Route::match(['get','post'],'/stores/{store}','Api@store') -> where('store','[0-9]+');
+Route::match(['get','post'],'/stores/{store}/feed','Api@feed') -> where('store','[0-9]+');
+Route::match(['get','post'],'/stores/{store}/products','Api@products') -> where('store','[0-9]+');
+Route::match(['get','post'],'/stores/{store}/posts','Api@blog_post') -> where('store','[0-9]+');
+Route::match(['get','post'],'/posts/{id}','Api@trivita_post') -> where('store','[0-9]+');
