@@ -25,7 +25,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 				<div class="product-card">
 					<div class="image-container">
-						<img src="https://cdn.trivita.com/US/EN/images/products/2745-lrg.png" alt="Vital C Pack">
+						<img src="https://cdn.trivita.com/US/EN/images/products/7847-lrg.png" alt="Vital C Pack">
 					</div>
 					<div class="block-text">
 						<h3 class="product-name border-under">Platinum Package</h3>
@@ -40,14 +40,14 @@
 							</ul>
 							<p class="price">Price: $179.97 - $50.00 = $129.97</p>
 						</div>
-						<a href="#" data-product="Vital C Pack" data-id="2745" data-price="39.98" onclick="return addToCart(this,true,true)" class="btn-wide">Add to cart</a>
+						<a href="#" data-product="Platinum Package" data-id="7847" data-price="129.97" onclick="return addToCart(this,true,true)" class="btn-wide">Add to cart</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 				<div class="product-card">
 					<div class="image-container">
-						<img src="https://cdn.trivita.com/US/EN/images/products/2745-lrg.png" alt="Vital C Pack">
+						<img src="https://cdn.trivita.com/US/EN/images/products/7849-lrg.png" alt="Vital C Pack">
 					</div>
 					<div class="block-text">
 						<h3 class="product-name border-under">Gold Package</h3>
@@ -61,14 +61,14 @@
 							</ul>
 							<p class="price">Price: $149.98 - $50.00 = $99.98</p>
 						</div>
-						<a href="#" data-product="Vital C Pack" data-id="2745" data-price="39.98" onclick="return addToCart(this,true,true)" class="btn-wide">Add to cart</a>
+						<a href="#" data-product="Gold Package" data-id="7849" data-price="99.98" onclick="return addToCart(this,true,true)" class="btn-wide">Add to cart</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 				<div class="product-card">
 					<div class="image-container">
-						<img src="https://cdn.trivita.com/US/EN/images/products/2745-lrg.png" alt="Vital C Pack">
+						<img src="https://cdn.trivita.com/US/EN/images/products/7853-lrg.png" alt="Vital C Pack">
 					</div>
 					<div class="block-text">
 						<h3 class="product-name border-under">Silver Package</h3>
@@ -81,7 +81,7 @@
 							</ul>
 							<p class="price">Price: $119.99 - $50.00 = $69.99</p>
 						</div>
-						<a href="#" data-product="Vital C Pack" data-id="2745" data-price="39.98" onclick="return addToCart(this,true,true)" class="btn-wide">Add to cart</a>
+						<a href="#" data-product="Silver Package" data-id="7853" data-price="69.99" onclick="return addToCart(this,true,true)" class="btn-wide">Add to cart</a>
 					</div>
 				</div>
 			</div>
