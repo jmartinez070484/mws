@@ -24,6 +24,13 @@ class UpdateStores extends Command
     protected $description = 'Update stores via API';
 
     /**
+     * Store exceptions
+     *
+     * @var Array
+     */
+    protected $exceptions = [];
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -40,41 +47,56 @@ class UpdateStores extends Command
      */
     public function handle()
     {
-        $httpRequest = Http::get(env('TRIVITA_WELLNESS_API').'/api/Store');
+        $httpRequest = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Store');
         $posts = $this->argument('posts');
         
         if($httpRequest -> ok()){
             $stores = $httpRequest -> json();
+
+            if(!$stores){
+                $stores = simplexml_load_string($httpRequest -> body());
+            }
             
             foreach($stores as $storeData){
-                $domain = isset($storeData['Settings']['Domain']) ? $storeData['Settings']['Domain'] : null;
-                $site = isset($storeData['Settings']['SiteAddress']) ? $storeData['Settings']['SiteAddress'] : null;
+                $isObject = is_object($storeData);
 
-                if($domain || $site){
-                    $store = $domain ? Store::where('domain',$domain) -> first() : Store::where('site',$site) -> first();
+                if($isObject && !in_array($storeData -> ID,$this -> exceptions) || !$isObject && !in_array($storeData['ID'],$this -> exceptions)){
+                    if($isObject){
+                        $domain = isset($storeData -> Settings -> Domain) ? $storeData -> Settings -> Domain : null;
+                        $site = isset($storeData -> Settings -> SiteAddress) ? $storeData -> Settings -> SiteAddress : null;
+                    }else{
+                        $domain = isset($storeData['Settings']['Domain']) ? $storeData['Settings']['Domain'] : null;
+                        $site = isset($storeData['Settings']['SiteAddress']) ? $storeData['Settings']['SiteAddress'] : null;
+                    }
+
+                    if($domain || $site){
+                        $store = $domain ? Store::where('domain','LIKE','%'.$domain.'%') -> first() : Store::where('site',$site) -> first();
+                        
+                        if(!$store){
+                            $store = new Store;
+
+                            if($domain){
+                                $store -> domain = $domain;
+                            }
+
+                            if($site){
+                                $store -> site = $site;
+                            }
+                        }
+
+                        $store -> apiUpdate();
+                        $store -> apiFeedUpdate();
+                        $store -> apiProductListUpdate();
+
+                        if($posts){
+                            $store -> apiPostsUpdate(true);
+                            $this->info($store -> name.' - Store Posts Updated!');
+                        }
+
+                        $this->info($store -> name.' - Store Updated!');
+                    }
+                }else{
                     
-                    if(!$store){
-                        $store = new Store;
-
-                        if($domain){
-                            $store -> domain = $domain;
-                        }
-
-                        if($site){
-                            $store -> site = $site;
-                        }
-                    }
-
-                    $store -> apiUpdate();
-                    $store -> apiFeedUpdate();
-                    $store -> apiProductListUpdate();
-
-                    if($posts){
-                        $store -> apiPostsUpdate(true);
-                        $this->info($store -> name.' - Store Posts Updated!');
-                    }
-
-                    $this->info($store -> name.' - Store Updated!');
                 }
             }
         }

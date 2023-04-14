@@ -15,7 +15,7 @@ class UpdateProducts extends Command
      *
      * @var string
      */
-    protected $signature = 'products:update {--email}';
+    protected $signature = 'products:update {id?}';
 
     /**
      * The console command description.
@@ -41,53 +41,61 @@ class UpdateProducts extends Command
      */
     public function handle()
     {
-        $httpRequestCategories = Http::get(env('TRIVITA_WELLNESS_API').'/api/Product');
+        if($this -> argument('id')){
+            $this -> updateProductData($this -> argument('id'));
+        }else{
+            $httpRequestCategories = Http::accept('application/json') -> get(env('TRIVITA_WELLNESS_API').'/api/Product');
 
-        if($httpRequestCategories -> ok()){
-            $categories = $httpRequestCategories -> json();
+            if($httpRequestCategories -> ok()){
+                $categories = $httpRequestCategories -> json();
 
-            foreach($categories as $categoryData){
-                $category = Category::find($categoryData['ID']);
+                foreach($categories as $categoryData){
+                    $category = Category::find($categoryData['ID']);
 
-                if(!$category){
-                    $category = new Category;
-                    $category -> id = $categoryData['ID'];
-                }
-
-                $category -> name = Str::title($categoryData['Description']);
-                $category -> slug = Str::slug($categoryData['Description']);
-                $category -> save();
-
-                $this->info($category -> name.' - Category Updated!');
-            }
-
-            $this->info('Categories Updated!');
-        }
-
-        $httpRequestCatalog = Http::get(env('TRIVITA_API_CATALOG'));
-
-        if($httpRequestCatalog -> ok()){
-            $catalog = $httpRequestCatalog -> json();
-
-            foreach($catalog as $item){
-                $prodId = isset($item['ProdID']) ? $item['ProdID'] : null;
-
-                if($prodId){
-                    $product = Product::where('product_id',$prodId) -> limit(1) -> first();
-
-                    if(!$product){
-                        $product = new Product();
-                        $product -> product_id = $prodId;
+                    if(!$category){
+                        $category = new Category;
+                        $category -> id = $categoryData['ID'];
                     }
 
-                    $product -> apiUpdate();
-                    $product -> apiReviewsUpdate();
+                    $category -> name = Str::title($categoryData['Description']);
+                    $category -> slug = Str::slug($categoryData['Description']);
+                    $category -> save();
 
-                    $this->info($product -> name ? 'Product - '.$product -> name : 'Failed - '.$prodId);
+                    $this->info($category -> name.' - Category Updated!');
+                }
+
+                $this->info('Categories Updated!');
+            }
+
+            $httpRequestCatalog = Http::accept('application/json') -> get(env('TRIVITA_API_CATALOG'));
+
+            if($httpRequestCatalog -> ok()){
+                $catalog = $httpRequestCatalog -> json();
+
+                foreach($catalog as $item){
+                    $prodId = isset($item['ProdID']) ? $item['ProdID'] : null;
+
+                    if($prodId){
+                        $this -> updateProductData($prodId);
+                    }
                 }
             }
+
+            $this->info('Products Updated!');
+        }
+    }
+
+    private function updateProductData($id){
+        $product = Product::where('product_id',$id) -> limit(1) -> first();
+
+        if(!$product){
+            $product = new Product();
+            $product -> product_id = $id;
         }
 
-        $this->info('Products Updated!');
+        $product -> apiUpdate();
+        $product -> apiReviewsUpdate();
+        
+        $this->info($product -> name ? 'Product - '.$product -> name : 'Failed - '.$id);
     }
 }
